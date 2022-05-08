@@ -1,0 +1,1 @@
+from gym_splendor.envs.splendor import SplendporEnv

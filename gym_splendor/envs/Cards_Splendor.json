@@ -1,0 +1,602 @@
+[
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 2, "blue": 2, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 3, "blue": 0, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 1, "green": 0, "black": 2, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 1, "green": 0, "black": 0, "white": 2},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 3, "green": 1, "black": 0, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 1, "green": 0, "black": 1, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 1,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 4, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 2, "blue": 1, "green": 0, "black": 2, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 2, "blue": 0, "green": 2, "black": 0, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 2, "black": 2, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 0, "green": 1, "black": 1, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 2, "blue": 0, "green": 1, "black": 1, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 1, "green": 3, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 2, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 1,
+    "stock": {"red": 4, "blue": 0, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 1,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 0, "white": 4},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 0, "white": 3},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 1, "green": 1, "black": 1, "white": 2},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 1, "black": 2, "white": 2},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 0, "green": 0, "black": 3, "white": 1},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 2, "blue": 0, "green": 0, "black": 0, "white": 2},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 1, "green": 1, "black": 1, "white": 1},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 2, "green": 1, "black": 0, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 2, "green": 2, "black": 1, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 1, "green": 2, "black": 1, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 1, "green": 0, "black": 1, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 1,
+    "stock": {"red": 0, "blue": 0, "green": 4, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 2, "green": 0, "black": 2, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 2, "blue": 0, "green": 0, "black": 1, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 1, "green": 1, "black": 1, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 3, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 0, "green": 2, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 1, "green": 1, "black": 0, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 1,
+    "stock": {"red": 0, "blue": 4, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 2, "green": 0, "black": 0, "white": 2},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 3, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 0, "blue": 0, "green": 2, "black": 0, "white": 2},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 3, "blue": 0, "green": 1, "black": 1, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "I",
+    "score": 0,
+    "stock": {"red": 1, "blue": 2, "green": 1, "black": 0, "white": 1},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 0, "blue": 3, "green": 0, "black": 2, "white": 2},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 2, "green": 0, "black": 1, "white": 4},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 3, "blue": 0, "green": 2, "black": 0, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 5, "green": 3, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 0, "green": 5, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 3,
+    "stock": {"red": 0, "blue": 0, "green": 6, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 3,
+    "stock": {"red": 0, "blue": 6, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 1, "blue": 0, "green": 0, "black": 4, "white": 2},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 5, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 3, "green": 0, "black": 0, "white": 5},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 0, "blue": 2, "green": 3, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 3, "blue": 2, "green": 2, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 3,
+    "stock": {"red": 6, "blue": 0, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 5, "white": 3},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 5, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 4, "green": 2, "black": 0, "white": 1},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 2, "blue": 3, "green": 0, "black": 3, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 2, "blue": 0, "green": 0, "black": 3, "white": 2},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 3,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 0, "white": 6},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 5, "blue": 0, "green": 0, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 5, "blue": 0, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 3, "blue": 3, "green": 0, "black": 0, "white": 2},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 2, "blue": 0, "green": 3, "black": 2, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 4, "blue": 0, "green": 1, "black": 2, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 0, "blue": 2, "green": 2, "black": 0, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 1,
+    "stock": {"red": 0, "blue": 0, "green": 3, "black": 2, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 2, "blue": 1, "green": 4, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 3, "blue": 0, "green": 5, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 2,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 0, "white": 5},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "II",
+    "score": 3,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 6, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 0, "blue": 7, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 0, "blue": 6, "green": 3, "black": 0, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 5,
+    "stock": {"red": 0, "blue": 7, "green": 3, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 3,
+    "stock": {"red": 3, "blue": 3, "green": 0, "black": 3, "white": 5},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 1, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 3,
+    "stock": {"red": 3, "blue": 0, "green": 3, "black": 5, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 0, "white": 7},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 5,
+    "stock": {"red": 0, "blue": 3, "green": 0, "black": 0, "white": 7},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 0, "blue": 3, "green": 0, "black": 3, "white": 6},
+    "type_stock": {"type_red": 0, "type_blue": 1, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 3,
+    "stock": {"red": 0, "blue": 5, "green": 3, "black": 3, "white": 3},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 0, "blue": 0, "green": 7, "black": 0, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 5,
+    "stock": {"red": 3, "blue": 0, "green": 7, "black": 0, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 3, "blue": 3, "green": 6, "black": 0, "white": 0},
+    "type_stock": {"type_red": 1, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 5,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 7, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "III",
+    "score": 3,
+    "stock": {"red": 5, "blue": 3, "green": 3, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 7, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 3, "blue": 0, "green": 0, "black": 6, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 1}
+  },
+  {
+    "type": "III",
+    "score": 3,
+    "stock": {"red": 3, "blue": 3, "green": 5, "black": 0, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 5,
+    "stock": {"red": 7, "blue": 0, "green": 0, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 6, "blue": 0, "green": 3, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "III",
+    "score": 4,
+    "stock": {"red": 7, "blue": 0, "green": 0, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 1, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 0, "blue": 4, "green": 4, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 3, "blue": 0, "green": 3, "black": 3, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 3, "blue": 3, "green": 3, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 3, "blue": 0, "green": 0, "black": 3, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 0, "blue": 3, "green": 0, "black": 3, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 4, "blue": 0, "green": 4, "black": 0, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 4, "blue": 0, "green": 0, "black": 4, "white": 0},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 0, "blue": 3, "green": 3, "black": 0, "white": 3},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 0, "blue": 4, "green": 0, "black": 0, "white": 4},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  },
+  {
+    "type": "Noble",
+    "score": 3,
+    "stock": {"red": 0, "blue": 0, "green": 0, "black": 4, "white": 4},
+    "type_stock": {"type_red": 0, "type_blue": 0, "type_green": 0, "type_black": 0, "type_white": 0}
+  }
+]
