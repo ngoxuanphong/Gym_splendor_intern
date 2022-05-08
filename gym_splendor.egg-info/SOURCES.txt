@@ -1,0 +1,6 @@
+setup.py
+gym_splendor.egg-info/PKG-INFO
+gym_splendor.egg-info/SOURCES.txt
+gym_splendor.egg-info/dependency_links.txt
+gym_splendor.egg-info/requires.txt
+gym_splendor.egg-info/top_level.txt
