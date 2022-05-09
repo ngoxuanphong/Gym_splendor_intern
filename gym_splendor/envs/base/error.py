@@ -6,11 +6,11 @@ def errorColor(message):
   pass
 
 def successColor(message):
-  # print(Fore.BLUE + message, end='')
-  # print(Style.RESET_ALL)
+  print(Fore.BLUE + message, end='')
+  print(Style.RESET_ALL)
   pass
 
 def RecommendColor(message):
-  # print(Fore.CYAN , message, end='')
-  # print(Style.RESET_ALL)
+  print(Fore.CYAN , message, end='')
+  print(Style.RESET_ALL)
   pass
