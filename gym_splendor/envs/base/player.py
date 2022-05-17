@@ -155,7 +155,7 @@ class Player:
         types_stock = len(list(set(arr_stock)))
         scale = amount_stock/types_stock
         if "auto_color" in arr_stock:
-            error.errorColor(str(self.name) + " lỗi đầu vào lấy stock auto_color "+ arr_stock)
+            error.errorColor(str(self.name) + " lỗi đầu vào lấy stock auto_color "+ str(arr_stock))
             return 0
         if amount_stock > 3 or scale == 3 or scale == 1.5:
             error.errorColor(str(self.name) + " lỗi đầu vào lấy không đúng số lượng loại, hoặc số lượng stock "+ str(arr_stock))
