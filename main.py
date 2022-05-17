@@ -3,6 +3,8 @@ import gym
 import gym_splendor
 import pandas as pd
 import time
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def check_winner(state):
     name = ''
@@ -30,7 +32,7 @@ def main():
     env = gym.make('gym_splendor-v0')
     env.reset()
     start_time = time.time()
-    while env.turn <25:
+    while env.turn <2500:
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         env.render()
         if done == True:

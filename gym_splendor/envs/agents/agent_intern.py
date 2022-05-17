@@ -24,6 +24,6 @@ class Agent(Player):
         # for type_card in reversed(state['Board'].dict_Card_Stocks_Show):
         #     print(type_card)
         # print(card.stocks, card.score)
-        stocks = ['red', 'red']
+        # stocks = ['red', 'red']
         return stocks, card, stock_return
     
