@@ -32,7 +32,7 @@ def main():
     env = gym.make('gym_splendor-v0')
     env.reset()
     start_time = time.time()
-    while env.turn <2500:
+    while env.turn <1000:
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         env.render()
         if done == True:
@@ -41,7 +41,7 @@ def main():
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
     state = env.state
     print(check_winner(state))
-    # print(time.time()-start_time)
+    print(time.time()-start_time)
 if __name__ == '__main__':
     main()
 
