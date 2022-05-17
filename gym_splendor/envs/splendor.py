@@ -33,7 +33,12 @@ class SplendporEnv(gym.Env):
         else:
             if isinstance(action, int)==True:
                 # self.board.hien_the()
-                action = self.player[self.turn % self.amount_player].transform(self.state,action)
+                try:
+                    action = self.player[self.turn % self.amount_player].transform(self.state,action)
+                except:
+                    error.errorColor("Action Khong hop le(truong hop bajn khong the lam gi khac)")
+                    return self.state,None,None,None
+
             stocks = action[0]
             card = action[1]
             stock_return = action[2]
@@ -68,7 +73,7 @@ class SplendporEnv(gym.Env):
         self.board.hien_the()
         t = 0
         for p in self.player:
-            print('\n',p.name,p.score,list(p.stocks.values()),list(p.stocks_const.values()),end="")
+            print(p.name,p.score,list(p.stocks.values()),list(p.stocks_const.values()),end="")
             print(" Card got: ",end="")
             for i in p.card_open:
                 print(i.id, end=" ")

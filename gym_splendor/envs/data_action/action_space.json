@@ -7409,5 +7409,6 @@
     "StockReturn2": "0",
     "StockReturn3": "0",
     "Index": 1294
-  }
+  },
+  "S000000000": {"TypeAction": "S", "Stock1": "0", "Stock2": "0", "Stock3": "0", "Card": "00", "StockAutoColor": "0", "StockReturn1": "0", "StockReturn2": "0", "StockReturn3": "0", "Index": 1295}
 }
