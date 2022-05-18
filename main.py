@@ -1,4 +1,5 @@
 
+from unicodedata import name
 import gym
 import gym_splendor
 import pandas as pd
@@ -35,13 +36,14 @@ def main():
     while env.turn <1000:
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         env.render()
+        # print(env.player[env.turn%env.amount_player])
         if done == True:
             break
     for i in range(4):
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
     state = env.state
     print(check_winner(state))
-    # print(time.time()-start_time)
+    print(time.time()-start_time)
 if __name__ == '__main__':
     main()
 
