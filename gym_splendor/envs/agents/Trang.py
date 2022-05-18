@@ -42,11 +42,11 @@ class Agent(Player):
                 if i.score>0 and card_type!= "Noble":
                     C.append(i)
                     a=i.stocks
-                    # #print(card.id,card.stocks,card.score, card.type_stock)
+                    # print(card.id,card.stocks,card.score, card.type_stock)
                     D.append(sum(a.values()))
                     # for stock in card:
-                    #     #print(card[stock])
-        # #print("do loi -------",(type(card)))
+                    #     print(card[stock])
+        # print("do loi -------",(type(card)))
         diem=0
         card_tg={}
 
@@ -57,8 +57,8 @@ class Agent(Player):
                     diem=C[i].score
                     card_tg=C[i]
                 
-        # #print("the target",card_tg.stocks,card_tg.score,card_tg.type_stock)       
-        # #print(D)
+        # print("the target",card_tg.stocks,card_tg.score,card_tg.type_stock)       
+        # print(D)
         
         
 #  Lấy stocks theo thẻ target  
@@ -69,7 +69,7 @@ class Agent(Player):
             if card_st[stock]- self.stocks[stock]- self.stocks_const[stock]> 1 and state['Board'].stocks[stock]>0:
                 
                 if len(stocks)<1:
-                    # #print("sai",state['Board'].stocks[stock])
+                    # print("sai",state['Board'].stocks[stock])
                     if state['Board'].stocks[stock] >3:
                         stocks.append(stock)
                         stocks.append(stock)
@@ -102,9 +102,9 @@ class Agent(Player):
                 if len(stock_return)<2 and 0<self.stocks[i]<diemm and i != 'auto_color':
                     diemm = self.stocks[i]
                     AA.append(i)
-            #print(AA,"kokoko")
+            # print(AA,"kokoko")
             stock_return.append(AA[-1])
-        # #print(stock_return,"leuleu")
+        # print(stock_return,"leuleu")
         
         if len(stocks)<1 and self.check_upsite_down(card_tg):
             p=3
@@ -112,7 +112,7 @@ class Agent(Player):
                 pass
 #  Tạo list thẻ có thể lấy
         List_card_can_take =self.check_list_card_can_take(state)
-        # #print(List_card_can_take,'aoila')
+        # print(List_card_can_take,'aoila')
         a=1000
         diemmm=0
         List_card_can_take_2=[]
@@ -121,19 +121,23 @@ class Agent(Player):
                 a= sum(Card.stocks.values())
                 diemmm=Card.score
                 List_card_can_take_2.append(Card)
+            elif Card.score>diemmm:
+                a= sum(Card.stocks.values())
+                diemmm=Card.score
+                List_card_can_take_2.append(Card)
             elif sum(Card.stocks.values())<a:
                 a= sum(Card.stocks.values())
                 diemmm=Card.score
                 List_card_can_take_2.append(Card)
-            # #print(List_card_can_take_2,'kkkkk')
+            # print(List_card_can_take_2,'kkkkk')
         if len(List_card_can_take_2)>0 :
             stocks=[]
             p=2
             if self.check_get_card(List_card_can_take_2[len(List_card_can_take_2)-1]):
                 card=List_card_can_take_2[len(List_card_can_take_2)-1]
-                # #print(stocks, card.id, stock_return)
+                # print(stocks, card.id, stock_return)
                 # return stocks, card, stock_return,2
-            # #print('hhhhhh')
+            # print('hhhhhh')
        
         
 
@@ -142,46 +146,57 @@ class Agent(Player):
             stock_return=[]
             p=1
             for stock in state['Board'].stocks: 
-                # #print(stock)          
+                # print(stock)          
                 if stock != 'auto_color' and sum(self.stocks.values())+len(stocks)-len(stock_return)>10 :
                     if stock in stocks and card_st[stock]<1 and len(stock_return) <3:
                         stock_return.append(stock)
-                    if card_st[stock]<1 and len(stock_return) <3 and self.stocks[stock]>0 and self.stocks[stock] + self.stocks_const[stock]-card_st[stock]>0:
-                            # #print(self.stocks[stock],"babab")
+                    if card_st[stock]<1 and len(stock_return) < 3 and self.stocks[stock]>0 and self.stocks[stock] + self.stocks_const[stock]-card_st[stock]>0:
+                            # print(self.stocks[stock],"babab")
                         stock_return.append(stock)
-                    elif len(stock_return) <3 and self.stocks[stock]>0 and self.stocks[stock] + self.stocks_const[stock]-card_st[stock]>0:
+                    elif len(stock_return) < 3 and self.stocks[stock]>0 and self.stocks[stock] + self.stocks_const[stock]-card_st[stock]>0:
                         stock_return.append(stock)
+            # if sum(self.stocks.values()) >10 :
+            #     p=1
+            #     for stock in stocks: 
+            #         stocks[stock]-=stocks[stock]
+            #     state["Board"].postStock(stocks[stock])
 
-        # #print(stock_return,"tl")     
-        # #print('imissu',sum(self.stocks.values()))
-        # #print('imissu',len(stocks))  
-        #print('so the dang up', len(self.card_upside_down))
-        #print(self.stocks,"NL player")
+        # print(stock_return,"tl")     
+        # print('imissu',sum(self.stocks.values()))
+        # print('imissu',len(stocks))  
+        # print('so the dang up', len(self.card_upside_down))
+        # print(self.stocks,"NL player")
         # try:
-        #     #print(card.stocks)
-        #     #print(self.check_get_card(card),"Lat duoc hay ko")
+        #     print(card.stocks, card.id)
         # except:
         #     pass
-        #print(state['Board'].stocks,"NL ban choi")
-        #print(self.name)
-        #print("return",stocks, card, stock_return,p)
+        # print(state['Board'].stocks,"NL ban choi")
+        # print(self.name)
+        # print("return",stocks, card, stock_return,p)
+        # try:
+        #     print(self.check_input_stock(stocks,state),"kiem tra dau vao")
+        # except:
+        #     pass
+
         # card= state['Board'].dict_Card_Stocks_Show['I'][0]
         return stocks, card, stock_return,p
 
-    def check_card_can_take(self,card):
-        price= card.stocks
-        NL_vang = self.stocks['auto_color']
-        for stock in price:
-            if self.stocks[stock]+ self.stocks_const[stock]- price[stock]<0:
-                if self.stocks[stock]+ self.stocks_const[stock]- price[stock]+NL_vang>=0:
-                    NL_vang = self.stocks[stock]+ self.stocks_const[stock]- price[stock]+NL_vang
-                else:   
-                    return False
-        return True
+    # def check_card_can_take(self,card):
+    #     price= card.stocks
+    #     NL_vang = self.stocks['auto_color']
+    #     for stock in price:
+    #         if self.stocks[stock]+ self.stocks_const[stock]+ NL_vang- price[stock]>=0:
+    #             NL_vang=
+
+    #             # if self.stocks[stock]+ self.stocks_const[stock]- price[stock]+NL_vang>=0:
+    #             #     NL_vang = self.stocks[stock]+ self.stocks_const[stock]- price[stock]+NL_vang
+    #             # else:   
+    #             return False
+    #     return True
     
     def check_list_card_can_take(self,state):
         List_card_can_take=[]
-        # #print(List_card_can_take, 'hahahaha')
+        # print(List_card_can_take, 'hahahaha')
         for card_type in state['Board'].dict_Card_Stocks_Show:
             if card_type != 'Noble':
                 for Card in state['Board'].dict_Card_Stocks_Show[card_type]:
@@ -191,5 +206,5 @@ class Agent(Player):
             if self.check_get_card(Card):
                 List_card_can_take.append(Card)
         
-        # #print(List_card_can_take,"List_card_can_take")
+        # print(List_card_can_take,"List_card_can_take")
         return List_card_can_take
