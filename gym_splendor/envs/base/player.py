@@ -377,14 +377,12 @@ class Player:
             return True
         else:
             return False
-<<<<<<< HEAD
 # self.score: Điểm
 # self.stock: nguyên liệu
 # self.stock_const: Nguyen lieu mac dinh
 # self.card_open: The da mo
 # self.card_upsidedown: Thẻ đã úp
 # self.cardNoble: Thẻ noble
-=======
     def checkthehople(self,Card):
         if Card == None:
             error.errorColor(str(self.name) + " khẻ truyền vào bị rỗng")
@@ -393,4 +391,3 @@ class Player:
             error.errorColor(str(self.name) + " Lay the Noble?????? Ao game ak")
             return False
         return True
->>>>>>> 1614f099d7d7657e4237a75ab94ef9280fe5c73d

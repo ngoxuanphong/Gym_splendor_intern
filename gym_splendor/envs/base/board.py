@@ -118,13 +118,6 @@ class Board:
         for i in self.__dict_Card_Stocks_Show.keys():
             print(i,end=": ")
             for j in self.__dict_Card_Stocks_Show[i]:
-<<<<<<< HEAD
-                print(j.id, end=" ")
-            print()
-# agent(state, self): state là một list gồm những {turn, board, player}
-# thẻ mở: dict_Card_Stocks_Show. VD: state['Board'].dict.Card_Stacks_Show["I"][0]
-# return
-=======
                 print(j.stt, end=" ")
             print()
     def getCardUp(self,type = ""):
@@ -140,4 +133,3 @@ class Board:
             for j in self.__dict_Card_Stocks_Show[i]:
                 if j.stt == stt:
                     return j
->>>>>>> 1614f099d7d7657e4237a75ab94ef9280fe5c73d
