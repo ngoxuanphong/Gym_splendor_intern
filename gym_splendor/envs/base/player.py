@@ -112,10 +112,13 @@ class Player:
     def action_real(self, state, stocks=[], card=None, stock_return=[], prioritize=0):
         if prioritize == 1 and len(stocks) != 0:
             self.get_stocks(stocks, state, stock_return)
+            return 
         elif prioritize == 2 and self.check_get_card(card) == True:
             self.get_card(state, card)
+            return
         elif prioritize == 3 and self.check_upsite_down(card) == True:
             self.get_upside_down(state, card, stock_return)
+            return
         else:
             if len(stocks) != 0:
                 self.get_stocks(stocks, state, stock_return)
@@ -124,7 +127,7 @@ class Player:
                     self.get_card(state, card)
                 elif self.check_upsite_down(card):
                     self.get_upside_down(state, card, stock_return)
-                    
+            return
 # p
     def get_stocks(self, stocks, state, stock_return):
         l = self.check_input_stock(stocks, state)
@@ -183,8 +186,7 @@ class Player:
             state["Board"].postStock(stock_return)
 
     def check_get_card(self, Card):
-        if Card == None:
-            error.errorColor(str(self.name) + " khẻ truyền vào bị rỗng")
+        if self.checkthehople(Card) == False:
             return False
         auto_color = self.__stocks["auto_color"]
         for i in Card.stocks.keys():
@@ -369,8 +371,17 @@ class Player:
             
 
     def check_upsite_down(self, card):
-        # print(card, card.id,"Vang")
+        if self.checkthehople(card) == False:
+            return False
         if len(self.__card_upside_down) < 3 and card !=None and card.id.find("Noble")==-1:
             return True
         else:
             return False
+    def checkthehople(self,Card):
+        if Card == None:
+            error.errorColor(str(self.name) + " khẻ truyền vào bị rỗng")
+            return False
+        if Card.id.find("Noble") != -1:
+            error.errorColor(str(self.name) + " Lay the Noble?????? Ao game ak")
+            return False
+        return True

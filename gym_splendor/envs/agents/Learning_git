@@ -1,4 +1,6 @@
 - clone: git clone (link)
 git branch -b NameBranch   : tạo nhánh
 git add . : lưu tạm dữ liệu vào bộ nhớ
-git commit -m " điền ghi chú"  : đấy lên git
+git commit -m " điền ghi chú"  : xác nhận dữ liệu ở bộ nhớ
+git push origin NameBranch: đẩy dữ liệu vào nhánh 
+git pull origin master : update dữ liệu từ trên git về máy 
