@@ -8,7 +8,7 @@ class Player:
     def reset(self):
         self.message = ""
         self.__score = 0
-        self.__stocks = {
+        self.__stocks = {               # Nguyên liệu hiện có
             "red": 0,
             "blue": 0,
             "green": 0,
@@ -16,20 +16,20 @@ class Player:
             "white": 0,
             "auto_color": 0,
         }
-        self.__stocks_const = {
+        self.__stocks_const = {         # Nguyên liệu VĨNH VIỄN hiện có
             "red": 0,
             "blue": 0,
             "green": 0,
             "black": 0,
             "white": 0,
         }
-        self.__card_open = []
-        self.__card_upside_down = []
-        self.__card_noble = []
+        self.__card_open = []           # Số card đang mở ĐANG SỞ HỮU
+        self.__card_upside_down = []    # Số card đang úp ĐANG SỞ HỮU
+        self.__card_noble = []          # Số card splendor ĐANG SỞ HỮU
 # Name
 
     @property
-    def name(self):
+    def name(self):                     # Trả về tên của người chơi
         return self.__name
 
     def setName(self, value):
@@ -37,7 +37,7 @@ class Player:
 # Score
 
     @property
-    def score(self):
+    def score(self):                    # Trả về điểm của người chơi
         return self.__score
 
     @score.setter
@@ -46,7 +46,7 @@ class Player:
 # Stock
 
     @property
-    def stocks(self):
+    def stocks(self):                   # Trả về số tài nguyên đang có của người chơi
         return self.__stocks.copy()
 
     @stocks.setter
@@ -55,7 +55,7 @@ class Player:
 # Stocks Const
 
     @property
-    def stocks_const(self):
+    def stocks_const(self):             # Trả về số tài nguyên VĨNH VIỄN đang có của người chơi
         return self.__stocks_const.copy()
 
     @stocks_const.setter
@@ -64,7 +64,7 @@ class Player:
 # card_open
 
     @property
-    def card_open(self):
+    def card_open(self):                # Trả về số card đang mở của người chơi
         return self.__card_open
 
     @card_open.setter
@@ -73,7 +73,7 @@ class Player:
 # card_upside_down
 
     @property
-    def card_upside_down(self):
+    def card_upside_down(self):         # Trả về số card đang úp của người chơi
         return self.__card_upside_down
 
     @card_upside_down.setter
@@ -82,7 +82,7 @@ class Player:
 # card_noble
 
     @property
-    def card_noble(self):
+    def card_noble(self):               # Trả về số card splendor của người chơi
         return self.__card_noble
 
     @card_noble.setter
@@ -106,7 +106,7 @@ class Player:
                     self.get_upside_down(state, card, stock_return)
                     
 # p
-    def get_stocks(self, stocks, state, stock_return):
+    def get_stocks(self, stocks, state, stock_return):          # Lấy tài nguyên
         l = self.check_input_stock(stocks, state)
         t = self.check_return(stock_return, stocks)
         if t == False:
@@ -164,7 +164,7 @@ class Player:
 
     def check_get_card(self, Card):
         if Card == None:
-            error.errorColor(str(self.name) + " khẻ truyền vào bị rỗng")
+            error.errorColor(str(self.name) + "\nthẻ truyền vào bị rỗng")
             return False
         auto_color = self.__stocks["auto_color"]
         for i in Card.stocks.keys():

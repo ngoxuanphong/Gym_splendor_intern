@@ -1,6 +1,7 @@
 import copy
 from gym_splendor.envs.base import error
 
+
 class Board:
     def __init__(self):
         self.name = "Board"
