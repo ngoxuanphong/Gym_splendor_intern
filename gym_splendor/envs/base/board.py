@@ -120,3 +120,6 @@ class Board:
             for j in self.__dict_Card_Stocks_Show[i]:
                 print(j.id, end=" ")
             print()
+# agent(state, self): state là một list gồm những {turn, board, player}
+# thẻ mở: dict_Card_Stocks_Show. VD: state['Board'].dict.Card_Stacks_Show["I"][0]
+# return

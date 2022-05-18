@@ -43,3 +43,4 @@ class Card_Stock(Card):
     
 class Card_Noble(Card):
     pass
+#

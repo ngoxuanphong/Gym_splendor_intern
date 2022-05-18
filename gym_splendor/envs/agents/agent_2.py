@@ -12,4 +12,4 @@ class Agent(Player):
         card = None
         stock_return = []
         return stocks, card, stock_return
-    
+

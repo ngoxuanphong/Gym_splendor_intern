@@ -328,3 +328,9 @@ class Player:
             return True
         else:
             return False
+# self.score: Điểm
+# self.stock: nguyên liệu
+# self.stock_const: Nguyen lieu mac dinh
+# self.card_open: The da mo
+# self.card_upsidedown: Thẻ đã úp
+# self.cardNoble: Thẻ noble
