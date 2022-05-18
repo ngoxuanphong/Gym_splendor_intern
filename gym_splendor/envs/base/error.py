@@ -1,7 +1,7 @@
 from colorama import Fore, Back, Style
 
 def errorColor(message):
-  print(Fore.RED + message, end='')
+  print(Fore.YELLOW + message, end='')
   print(Style.RESET_ALL)
   pass
 
@@ -11,6 +11,6 @@ def successColor(message):
   pass
 
 def RecommendColor(message):
-  print(Fore.CYAN , message, end='')
+  print(Fore.CYAN + message, end='')
   print(Style.RESET_ALL)
   pass

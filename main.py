@@ -1,7 +1,10 @@
+
 import gym
 import gym_splendor
-import os
 import pandas as pd
+import time
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def check_winner(state):
     name = ''
@@ -23,19 +26,22 @@ def check_winner(state):
         # pd.read_csv(f'State_tam_{player_win.name}.csv').assign(win = 1).to_csv(f'State_tam_{player_win.name}.csv', index = False)
         return player_win.name, score_max, state['Turn']+1
     else:
-        return "NA0"
+        return "None"
 
 def main():
     env = gym.make('gym_splendor-v0')
     env.reset()
-    while env.turn < 200:
-        o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(env.state))
+    start_time = time.time()
+    while env.turn <1000:
+        o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         env.render()
         if done == True:
             break
-    state = env.state
+    for i in range(4):
+        o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
+        state = env.state
     print(check_winner(state))
-
+    # print(time.time()-start_time)
 if __name__ == '__main__':
     main()
 

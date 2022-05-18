@@ -28,7 +28,6 @@ class Card:
 
 
 
-
 class Card_Stock(Card):
     def __init__(self,id, type_stock, score, dict_buy):
         super().__init__(id, score, dict_buy)
