@@ -379,7 +379,7 @@ class Player:
             return False
     def checkthehople(self,Card):
         if Card == None:
-            error.errorColor(str(self.name) + " khẻ truyền vào bị rỗng")
+            error.errorColor(str(self.name) + " thẻ truyền vào bị rỗng")
             return False
         if Card.id.find("Noble") != -1:
             error.errorColor(str(self.name) + " Lay the Noble?????? Ao game ak")

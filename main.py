@@ -27,12 +27,12 @@ def check_winner(state):
         return player_win.name, score_max, state['Turn']+1
     else:
         return "None"
-
+turn = 10
 def main():
     env = gym.make('gym_splendor-v0')
     env.reset()
     start_time = time.time()
-    while env.turn <1000:
+    while env.turn < turn:
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         env.render()
         if done == True:
