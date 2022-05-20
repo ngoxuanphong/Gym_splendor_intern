@@ -43,9 +43,9 @@ class Agent(Player):
         card_target_stock = card_target.stocks
         for stock in card_target_stock:
             if self.stocks[stock] + self.stocks_const[stock] - card_target_stock[stock] < 0:
-                print("Can't get target card!")
+              #  print("Can't get target card!")
                 return False
-        print("Can get target card!")
+      #  print("Can get target card!")
         return True       
 
 
@@ -68,16 +68,16 @@ class Agent(Player):
         # for type_card in state['Board'].dict_Card_Stocks_Show:
         #     if type_card != 'Noble':
         #         for card in state['Board'].dict_Card_Stocks_Show[type_card]:
-        #             print(card.id, card.stocks, card.score, card.type_stock)
+        #           #  print(card.id, card.stocks, card.score, card.type_stock)
 
         # --------------------------------------------------------------------------------
         # Target buổi 2: in tất cả các thẻ có trên bàn và thẻ CÓ ĐIỂM nhưng cần trả ít nguyên liệu nhất
         # Task 1: In ra tất cả các thẻ
         # --------------------------------------------------------------------------------
-        for type_card in state['Board'].dict_Card_Stocks_Show:
-            if type_card != 'Noble':
-                for card in state['Board'].dict_Card_Stocks_Show[type_card]:
-                    print(card.id, card.stocks, card.score, card.type_stock)
+        # for type_card in state['Board'].dict_Card_Stocks_Show:
+        #     if type_card != 'Noble':
+        #         for card in state['Board'].dict_Card_Stocks_Show[type_card]:
+                  #  print(card.id, card.stocks, card.score, card.type_stock)
 
         # Task 2: In ra thẻ có điểm và cần ít tài nguyên nhất
         len_value = 15
@@ -92,9 +92,9 @@ class Agent(Player):
                         elif sum(card.stocks.values()) == len_value and card.score >= needed_card.score:
                             needed_card = card
                             len_value = sum(card.stocks.values())                
-        print("\n------------------------------------------------------")
-        print("Needed Card: ID: {}, Stock: {}, Score: {}, Type Stock: {}".format(needed_card.id, needed_card.stocks, needed_card.score, needed_card.type_stock))
-        print("------------------------------------------------------\n")
+      #  print("\n------------------------------------------------------")
+      #  print("Needed Card: ID: {}, Stock: {}, Score: {}, Type Stock: {}".format(needed_card.id, needed_card.stocks, needed_card.score, needed_card.type_stock))
+      #  print("------------------------------------------------------\n")
         # ---------------------------------------------------------------------------------
         # Task 2: Bốc tài nguyên sao cho lấy được cái thẻ needed card phía trên
         # --------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ class Agent(Player):
 
         # # a1: Kiểm tra xem tài nguyên cần để mua thẻ có cái nào >= 2 không?, nếu không => nhảy đến (1)
         # if any(x >= 2 for x in needed_card.stocks.values()):
-        #     print("True")
+        #   #  print("True")
         #     # a2: Nếu có => Kiểm tra tài nguyên đó trên bàn có >= 4 không?, có => bốc 2 tài nguyên
         #     for stock_in_card in needed_card.stocks:
         #         if needed_card.stocks[stock_in_card] >= 2 and needed_card.stocks[stock_in_card] - (self.stocks[stock_in_card] + self.stocks_const[stock_in_card]) >= 2:
@@ -156,21 +156,21 @@ class Agent(Player):
                 
         
         # Print số lượng tài nguyên đang có trên bàn:
-        print("Resource in board:")
-        for stock_in_board_key in state["Board"].stocks:
-            print("{}: {}".format(stock_in_board_key, state["Board"].stocks[stock_in_board_key]))
+      #  print("Resource in board:")
+        # for stock_in_board_key in state["Board"].stocks:
+          #  print("{}: {}".format(stock_in_board_key, state["Board"].stocks[stock_in_board_key]))
         
         # Print các tài nguyên vĩnh viễn đang có
-        print("Tai nguyen vinh vien {}".format(self.stocks_const))
+      #  print("Tai nguyen vinh vien {}".format(self.stocks_const))
         
         # Print các tài nguyên hữu hạn
-        print("Tai nguyen huu han {}".format(self.stocks))
+      #  print("Tai nguyen huu han {}".format(self.stocks))
 
         # Gán card taget :để lấy nguyên liệu là card loại 1 và stt đầu tiên(vì nó là một list)
         # stocks là một dict nguyên liệu của thẻ đó
 
         # In ra nguyên liệu mặc định của người chơi đó(nguyên liệu thẻ đã lấy)
-        print(self.stocks_const)
+      #  print(self.stocks_const)
    
 
         # Buoi 3:
@@ -187,7 +187,7 @@ class Agent(Player):
             # Bốc tài nguyên    
             # a1: Kiểm tra xem tài nguyên cần để mua thẻ có cái nào >= 2 không?, nếu không => nhảy đến (1)
             if any(x >= 2 for x in needed_card.stocks.values()):
-                print("True")
+              #  print("True")
                 # a2: Nếu có => Kiểm tra tài nguyên đó trên bàn có >= 4 không?, có => bốc 2 tài nguyên
                 for stock_in_card in needed_card.stocks:
                     if needed_card.stocks[stock_in_card] >= 2 and needed_card.stocks[stock_in_card] - (self.stocks[stock_in_card] + self.stocks_const[stock_in_card]) >= 2:
