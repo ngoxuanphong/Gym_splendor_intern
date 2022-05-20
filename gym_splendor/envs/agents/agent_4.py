@@ -1,101 +1,88 @@
 from ..base.player import Player
 import random
 import math
+from collections import Counter
 
 
 class Agent(Player):
     def __init__(self, name):
         super().__init__(name)
 
-    def action(self,  state=None,action_space = None):
+    def action(self, state):
         stocks = []
         card = None
         stock_return = []
 
-        # card = self.Checklatthe(state["Board"])
-        # nlnhamtoi = list(self.check_board_nl(state["Board"]).keys())
-        # if card != None:
-        #     return stocks,card,stock_return
-        # if len(nlnhamtoi) >= 3:
-        #     stocks = nlnhamtoi[:3]
-        # stock_return = list(self.TimNguyenLieuTra(stocks))
+        list_build_IV=[]
+        dict_tn_target = {}#loại thẻ noble chỉ có 2 tài nguyên
+        count_type_tn_build_IV = {'red': 0, 'blue': 0, 'green': 0, 'black': 0,
+                                  'white': 0}  # loại thẻ noble có 3 tài nguyên
+        tn_target = [] # tài nguyên chọn để build thực sự.
+        list_tnvv_III = []
+        list_tnvv_II = []
+        list_tnvv_I = []
+
+        for type_card in state['Board'].dict_Card_Stocks_Show:
+            if type_card == 'Noble':
+                list_tn_target_ = []
+                for card in state['Board'].dict_Card_Stocks_Show['Noble']:
+                    count_card_tn_eval_2 = 0
+                    for k in card.stocks.keys():
+                        if card.stocks[k] > 0:
+                            count_card_tn_eval_2 +=1
+
+                    if count_card_tn_eval_2 == 2:
+                        for k in card.stocks.keys():
+                            if card.stocks[k] > 0:
+                                list_tn_target_.append(k)
+                        dict_tn_target = dict((x, list_tn_target_.count(x)) for x in set(list_tn_target_))
+                    else:
+                        list_build_IV.append(card.stocks)
+                for tn_build_each_card_IV in list_build_IV:
+                    if tn_build_each_card_IV['red'] > 0:
+                        count_type_tn_build_IV['red'] += 1
+                    if tn_build_each_card_IV['blue'] > 0:
+                        count_type_tn_build_IV['blue'] += 1
+                    if tn_build_each_card_IV['green'] > 0:
+                        count_type_tn_build_IV['green'] += 1
+                    if tn_build_each_card_IV['black'] > 0:
+                        count_type_tn_build_IV['black'] += 1
+                    if tn_build_each_card_IV['white'] > 0:
+                        count_type_tn_build_IV['white'] += 1
+
+                print("######################################################")
+                dict_tn_target = dict(sorted(dict_tn_target.items(), key=lambda x: x[1], reverse=True))
+                count_type_tn_build_IV = dict(sorted(count_type_tn_build_IV.items(), key=lambda x: x[1], reverse=True))
+                print(dict_tn_target)  # loại thẻ noble chỉ có 2 tài nguyên
+                print(count_type_tn_build_IV)  # loại thẻ có 3 tài nguyên
+
+                #chọn tài nguyên, ưu tiên loại tài nguyên trong thẻ có 2 tài nguyên
+                #xét thẻ có 2 tài nguyên
+
+                if len(dict_tn_target) != 0:
+                    if len(dict_tn_target) == 2:
+                        tn_target.append(x for x in dict_tn_target.keys())
+                    else: # nếu len(dict_tn_target) > 2
+                        #nếu tất cả giá trị = 1 thì xét sang list kia
+                        for k,v in dict_tn_target.items():
+                            if not v != 1:
+                                while (len(tn_target) <= 3):
+                                    for m in count_type_tn_build_IV.keys():
+                                        tn_target.append(m)
+                            else:
+                                for m in dict_tn_target.keys():
+                                    if len(tn_target) <=3:
+                                        tn_target.append(m)
+                #else:
+                 #   for
+
+            print("-------------------------&&&&&&&&&&&&&&&&&&&&&&&&&&&&&--------------------------")
+            print(tn_target)
+
 
         return stocks, card, stock_return
-    
-    def board_nl(self,board):
-        x = board.stocks
-        y = self.stocks_const
-        x.pop("auto_color")
-        dic_nl = {}
-        for i in x.keys():
-            nl = x[i] - y[i]
-            dic_nl[i] = nl
-        dict_nl = {k: v for k, v in sorted(
-            dic_nl.items(), key=lambda item: item[1], reverse=True)}
-        return dict_nl
-    
-    def check_board_nl(self,board):
-        dict_check_nl = {}
-        for i in self.board_nl(board):
-            if self.board_nl(board)[i] > 0:
-                dict_check_nl[i] = self.board_nl(board)[i]
-        return dict_check_nl
+def check_max_value_dict(dic):
+    max_value = max(dic.values())
+    max_keys = [k for k, v in dic.items() if v == max_value]
+    return max_keys#, max_value
 
-    def Checklatthe(self,board):
-        list_card = []
-        for type_card in board.dict_Card_Stocks_Show.keys():
-            if type_card != "Noble":
-                for card in board.dict_Card_Stocks_Show[type_card]:
-                    if self.check_get_card(card):
-                        list_card.append(card)
-        ti_so = []
-        for i in list_card:
-            x = i.score
-            y = sum(list(i.stocks.values()))
-            dinh_gia = x/y
-            ti_so.append(dinh_gia)
-        dinh_gia_max = 0
-        for i in ti_so:
-            if dinh_gia_max < i:
-                dinh_gia_max = i
-        for i in range(len(ti_so)):
-            if ti_so[i] == dinh_gia_max:
-                return list_card[i]
-    
-    def TimNguyenLieuTra(self,arr):
-        dict_hien_tai = self.stocks.copy()
-        for i in arr:
-            dict_hien_tai[i] += 1
-        snl = sum(list(dict_hien_tai.values()))
-        dict_tra = {
-            "red": 0,
-            "blue": 0,
-            "green": 0,
-            "white": 0,
-            "black": 0,
-            "auto_color": 0,
-        }
-        if snl <= 10:
-            return dict_tra
-        else:
-            for i in range(snl - 10):
-                x = self.NLTTvaNLC(self.stocks_const, dict_hien_tai)
-                dict_hien_tai[x] -= 1
-                dict_tra[x] += 1
-        for key,value in dict_tra.items():
-            for i in range(value):
-                yield key
-
-    def NLTTvaNLC(self,const_stock, stock):
-        x = const_stock
-        y = stock
-        dict_nl_can_bo = {}
-        for i in x.keys():
-            if y[i] > 0:
-                nl_can_bo = x[i] - y[i]
-            else:
-                nl_can_bo = -10
-            dict_nl_can_bo[i] = nl_can_bo
-        dict_nl_can_bo = {k: v for k, v in sorted(
-            dict_nl_can_bo.items(), key=lambda item: item[1], reverse=True)}
-        return list(dict_nl_can_bo.keys())[0]
