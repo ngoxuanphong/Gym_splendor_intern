@@ -81,7 +81,7 @@ class Agent(Player):
                     if sum(card.stocks.values())==min and card.score == score_max :
                         card_selected_best = card
                         card_stocks_best = card.stocks
-                        print(card.stocks, card.score, card.type_stock)
+                        # print(card.stocks, card.score, card.type_stock)
                         break
 
         #list of available card to choose                    
@@ -92,7 +92,7 @@ class Agent(Player):
                     if self.check_get_card_ok(card,state):
                         list_card_id_avai.append(card.id)
 
-        print(list_card_id_avai)
+        # print(list_card_id_avai)
 
         #select the optimal card to take
         if self.check_get_card_ok(card_selected_best,state):
@@ -113,8 +113,8 @@ class Agent(Player):
             card_selected = state['Board'].dict_Card_Stocks_Show[index1[index1_1]][index2[index1_2]]
             card_stocks = state['Board'].dict_Card_Stocks_Show[index1[index1_1]][index2[index1_2]].stocks
 
-        print("Thẻ đã target:")
-        print(card_stocks,card_selected.score,card_selected.id)
+        # print("Thẻ đã target:")
+        # print(card_stocks,card_selected.score,card_selected.id)
         
         
         #get resource
