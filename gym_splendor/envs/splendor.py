@@ -32,7 +32,7 @@ class SplendporEnv(gym.Env):
             return self,None,True,None
         else:
             if isinstance(action, int)==True:
-                error.errorColor("Dell hieu")
+                # error.errorColor("Dell hieu")
                 try:
                     action = self.player[self.turn % self.amount_player].transform(self.state,action)
                 except:
