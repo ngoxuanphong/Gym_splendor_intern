@@ -21,19 +21,24 @@ class SplendporEnv(gym.Env):
         self.amount_player = amount_player
         self.board = None
         self.player = None
-        self.pVictory = None
+        
         self.state = {}
         self.actioner = AS.Action_Space_State()
 
     def step(self, action):
-        if self.close() and self.turn % self.amount_player == self.amount_player-1:
-            self.state["Victory"] = self.pVictory
+        self.close()
+        if self.End_Game == True:
             self.turn = self.turn+1
             return self,None,True,None
         else:
             if isinstance(action, int)==True:
-                # self.board.hien_the()
-                action = self.player[self.turn % self.amount_player].transform(self.state,action)
+                error.errorColor("Dell hieu")
+                try:
+                    action = self.player[self.turn % self.amount_player].transform(self.state,action)
+                except:
+                    error.errorColor("Action Khong hop le(truong hop bajn khong the lam gi khac)")
+                    return self.state,None,None,None
+
             stocks = action[0]
             card = action[1]
             stock_return = action[2]
@@ -55,6 +60,7 @@ class SplendporEnv(gym.Env):
         for p in self.player:
             p.reset()
         self.pVictory = None
+        self.End_Game = False
         self.state = {
             "Turn" : 0,
             "Board": self.board,
@@ -68,7 +74,7 @@ class SplendporEnv(gym.Env):
         self.board.hien_the()
         t = 0
         for p in self.player:
-            print('\n',p.name,p.score,list(p.stocks.values()),list(p.stocks_const.values()),end="")
+            print(p.name,p.score,list(p.stocks.values()),list(p.stocks_const.values()),end="")
             print(" Card got: ",end="")
             for i in p.card_open:
                 print(i.id, end=" ")
@@ -123,15 +129,16 @@ class SplendporEnv(gym.Env):
         self.state["Board"].setDict_Card_Stocks_UpsiteDown(dict_board_upsite_down)
 
     def close(self):
-        arr_point = [i.score for i in self.player]
-        max_point = max(arr_point)
-        if max_point >= 15:
-            arr_point = [1 if i == max_point else 0 for i in arr_point]
-            arr_amount_card = [len(i.card_open) for i in self.player]
-            min = 100
-            for i in range(len(arr_point)):
-                if arr_point[i] == 1 and arr_amount_card[i] < min:
-                    min = arr_amount_card[i]
-                    self.pVictory = self.player[i]
-            return True
-        return False
+        if (self.turn+1) % self.amount_player == 0:
+            arr_point = [i.score for i in self.player]
+            max_point = max(arr_point)
+            if max_point >= 15:
+                arr_point = [1 if i == max_point else 0 for i in arr_point]
+                arr_amount_card = [len(i.card_open) for i in self.player]
+                min = 100
+                for i in range(len(arr_point)):
+                    if arr_point[i] == 1 and arr_amount_card[i] < min:
+                        min = arr_amount_card[i]
+                        self.pVictory = self.player[i]
+                        self.End_Game = True
+                        self.state["Victory"] = self.pVictory

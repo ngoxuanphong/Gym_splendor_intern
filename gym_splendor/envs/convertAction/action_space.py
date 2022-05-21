@@ -152,10 +152,12 @@ class Action_Space_State():
         for i in range(vitri, vitri+5):
             stocks_const_player[iterable[i-vitri]] = List_State[i]
         # Card UpSiteDown
+        card_up_down = []
         vitri = 219
         for i in range(vitri, vitri+100):
             if List_State[i] == 1:
                 list_card.append(i-vitri+1)
+                card_up_down.append(i-vitri+1)
         # print("dichtustate: ",list_card)
         
         data = pd.DataFrame(columns=["TypeAction", "Stock1", "Stock2", "Stock3",
@@ -177,15 +179,17 @@ class Action_Space_State():
             card_stock = self.all_data[card]["stock"].copy()
             if check_get_card(stocks_player, stocks_const_player, card_stock):
                 data = data.append(cv.getCard(id), ignore_index=True)
-            if stocks_board["auto_color"] > 0:
-                data = data.append(cv.getUpDown(id), ignore_index=True)
-            else:
-                data = data.append(cv.getUpDownNoneAuto(id), ignore_index=True)
+            if len(card_up_down)<3 and not (card in card_up_down):
+                if stocks_board["auto_color"] > 0:
+                    data = data.append(cv.getUpDown(id), ignore_index=True)
+                else:
+                    data = data.append(cv.getUpDownNoneAuto(id), ignore_index=True)
         
         List_Code = cv.CreateCode(data)
         list_code = []
         for i in List_Code:
             list_code.append(self.all_action[i]["Index"])
+        list_code.append(1295)
         return list_code
 
     def formatListCard(self, arr):

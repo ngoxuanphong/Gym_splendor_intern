@@ -119,6 +119,7 @@ def CreateAll():
     data = data.append(getUpDownNoneAuto(id),ignore_index=True)
     for stock in stocks:
       data = data.append(getUpDown_return_stock(id,stock),ignore_index=True)
+  data = data.append(getCard("00"),ignore_index=True)
   ma = CreateCode(data)
   data = data.set_index([pd.Index(ma)],[""])
   data.to_json("../data_action/action_space.json",orient="index")
