@@ -1,10 +1,12 @@
 
+from collections import Counter
 from unicodedata import name
 import gym
 import gym_splendor
 import pandas as pd
 import time
 import warnings
+
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def check_winner(state):
@@ -29,21 +31,36 @@ def check_winner(state):
     else:
         return "None"
 
+a = 0
+b = 0
+c = 0
+d = 0
+
+env = gym.make('gym_splendor-v0')
 def main():
-    env = gym.make('gym_splendor-v0')
     env.reset()
     start_time = time.time()
     while env.turn <1000:
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
-        env.render()
+        # env.render()
         # print(env.player[env.turn%env.amount_player])
         if done == True:
             break
     for i in range(4):
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         state = env.state
-    print(check_winner(state))
+    # print(check_winner(state))
+    print(env.pVictory.name,env.pVictory.score,env.turn)
+    # for player in env.player:
+    #     if env.pVictory.name == player.name:
+    #         a += 1
     # print(time.time()-start_time)
-if __name__ == '__main__':
-    main()
+    return env.pVictory.name
+
+cnt = Counter(main() for i in range(100))
+print(cnt)
+# for i in range(100):
+#     if __name__ == '__main__':
+#         print('ván', i, end= ' ')
+#         main()
 

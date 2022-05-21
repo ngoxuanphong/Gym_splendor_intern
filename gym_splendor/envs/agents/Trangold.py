@@ -39,14 +39,25 @@ class Agent(Player):
         D=[]
         for card_type in state['Board'].dict_Card_Stocks_Show:
             for i in state['Board'].dict_Card_Stocks_Show[card_type]:
-                if i.score>0 and card_type!= "Noble":
+                EE=[]
+                if i.score>0 and card_type!= "Noble" :
+                # if i.score>0 and card_type!= "Noble" and card_type!= 'I':
                     C.append(i)
-                    a=i.stocks
-                    # print(card.id,card.stocks,card.score, card.type_stock)
-                    D.append(sum(a.values()))
+                    # auto_color = self.__stocks["auto_color"]
+                    for stock in i.stocks:
+                        if i.stocks[stock]- self.stocks[stock]- self.stocks_const[stock]> 0:
+                            EE.append(i.stocks[stock]- self.stocks[stock]- self.stocks_const[stock])
+                        else:
+                            EE.append(0)
+                        # print(card.id,card.stocks,card.score, card.type_stock)
+                    if sum(EE)- self.stocks["auto_color"] <0:
+                        D.append(0)
+                    else:
+                        D.append(sum(EE)- self.stocks["auto_color"])
                     # for stock in card:
-                    #     print(card[stock])
+                    #     # print(card[stock])
         # print("do loi -------",(type(card)))
+        # print(len(C),len(D))
         diem=0
         card_tg={}
 
@@ -56,6 +67,27 @@ class Agent(Player):
                 if C[i].score>diem:
                     diem=C[i].score
                     card_tg=C[i]
+        # C=[]
+        # D=[]
+        # for card_type in state['Board'].dict_Card_Stocks_Show:
+        #     for i in state['Board'].dict_Card_Stocks_Show[card_type]:
+        #         if i.score>0 and card_type!= "Noble":
+        #             C.append(i)
+        #             # a=i.stocks
+        #             # print(card.id,card.stocks,card.score, card.type_stock)
+        #             D.append(sum(i.stocks.values()))
+        #             # for stock in card:
+        #             #     # print(card[stock])
+        # # print("do loi -------",(type(card)))
+        # diem=0
+        # card_tg={}
+
+        # for i in range(0,len(D),1):
+           
+        #     if D[i]==min(D):
+        #         if C[i].score>diem:
+        #             diem=C[i].score
+        #             card_tg=C[i]
                 
         # print("the target",card_tg.stocks,card_tg.score,card_tg.type_stock)       
         # print(D)
@@ -76,7 +108,7 @@ class Agent(Player):
                     elif state['Board'].stocks[stock] <4:
                         stocks.append(stock)
             elif card_st[stock]- self.stocks[stock]- self.stocks_const[stock]>0 and state['Board'].stocks[stock]>0:
-                if len(stocks)<3:
+                if len(stocks) < 3:
                     if len(stocks)==2 and stocks[0]==stocks[1]:
                         pass
                     else:
@@ -85,7 +117,7 @@ class Agent(Player):
 
         for stock in state['Board'].stocks:
             p=1
-            if len(stocks)<3 and stock not in stocks and stock != 'auto_color' :
+            if len(stocks) < 3 and stock not in stocks and stock != 'auto_color' :
                 if len(stocks)==2 and stocks[0]==stocks[1]:
                     pass
                 elif state['Board'].stocks[stock]>0:
@@ -97,12 +129,13 @@ class Agent(Player):
             diemm=100
             p = 3
             AA=[]
+            card=card_tg
             for i in self.stocks:
             
                 if len(stock_return)<2 and 0<self.stocks[i]<diemm and i != 'auto_color':
                     diemm = self.stocks[i]
                     AA.append(i)
-            print(AA,"kokoko")
+            # print(AA,"kokoko")
             stock_return.append(AA[-1])
         # print(stock_return,"leuleu")
         
@@ -131,9 +164,10 @@ class Agent(Player):
                 List_card_can_take_2.append(Card)
             # print(List_card_can_take_2,'kkkkk')
         if len(List_card_can_take_2)>0 :
-            stocks=[]
+            
             p=2
             if self.check_get_card(List_card_can_take_2[len(List_card_can_take_2)-1]):
+                stocks=[]
                 card=List_card_can_take_2[len(List_card_can_take_2)-1]
                 # print(stocks, card.id, stock_return)
                 # return stocks, card, stock_return,2
@@ -142,7 +176,7 @@ class Agent(Player):
         
 
 
-        else:
+        elif len(stocks)>0:
             stock_return=[]
             p=1
             for stock in state['Board'].stocks: 
@@ -155,26 +189,23 @@ class Agent(Player):
                         stock_return.append(stock)
                     elif len(stock_return) <3 and self.stocks[stock]>0 and self.stocks[stock] + self.stocks_const[stock]-card_st[stock]>0:
                         stock_return.append(stock)
-            # if sum(self.stocks.values()) >10 :
-            #     p=1
-            #     for stock in stocks: 
-            #         stocks[stock]-=stocks[stock]
-            #     state["Board"].postStock(stocks[stock])
 
         # print(stock_return,"tl")     
         # print('imissu',sum(self.stocks.values()))
         # print('imissu',len(stocks))  
-        print('so the dang up', len(self.card_upside_down))
-        print(self.stocks,"NL player")
+        # print('so the dang up', len(self.card_upside_down))
+        # print(self.stocks,"NL player")
         try:
-            print(card.stocks, card.id)
+            # print(card.stocks, card.id)
+            pass
         except:
             pass
-        print(state['Board'].stocks,"NL ban choi")
-        print(self.name)
-        print("return",stocks, card, stock_return,p)
+        # print(state['Board'].stocks,"NL ban choi")
+        # print(self.name)
+        # print("return",stocks, card, stock_return,p)
         try:
-            print(self.check_input_stock(stocks,state),"kiem tra dau vao")
+            # print(self.check_input_stock(stocks,state),"kiem tra dau vao")
+            pass
         except:
             pass
 
@@ -198,7 +229,8 @@ class Agent(Player):
         List_card_can_take=[]
         # print(List_card_can_take, 'hahahaha')
         for card_type in state['Board'].dict_Card_Stocks_Show:
-            if card_type != 'Noble':
+            if card_type != 'Noble' :
+                # and card_type != 'I'
                 for Card in state['Board'].dict_Card_Stocks_Show[card_type]:
                     if self.check_get_card(Card):
                         List_card_can_take.append(Card)
