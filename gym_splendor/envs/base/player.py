@@ -132,7 +132,7 @@ class Player:
         l = self.check_input_stock(stocks, state)
         t = self.check_return(stock_return, stocks)
         if t == False:
-            error.errorColor(str(self.name) + " không thể lấy nguyên liệu do đầu vào bị lỗi!!!",  'stock: '+ str(stocks)+ 'return: '+ str(stock_return))
+            error.errorColor(str(self.name) + " không thể lấy nguyên liệu do đầu vào bị lỗi!!!"+  'stock: '+ str(stocks)+ 'return: '+ str(stock_return))
             return None
         if l == 1:
             for stock in stocks:
