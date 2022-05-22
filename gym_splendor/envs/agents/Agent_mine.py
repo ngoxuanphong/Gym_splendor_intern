@@ -26,6 +26,7 @@ class Agent(Player):
         stock_return = []
         listcard=[]
         d=0
+        max1=0
         min1=10
         for type_card in state['Board'].dict_Card_Stocks_Show:
             if type_card != 'Noble':
@@ -50,7 +51,6 @@ class Agent(Player):
                     print(card.id, card.stocks, card.score, card.type_stock)
                     if self.check_get_card(card):
                         listcard.append(card)
-        
         print(listcard)
         #stocks là một dict nguyên liệu của thẻ đó
         card_st = card_target.stocks
@@ -60,10 +60,19 @@ class Agent(Player):
         # Kiểm tra xem nguyên liệu của thẻ cần là bao nhiêu để lấy nguyên liệu
         #Nếu thẻ cần mở có nguyên liệu cần từ 2 trở lên, lấy trước 2 nguyên liệu. Nếu nguyên liệu đó trên bàn k >3 thì lấy 1 và chuyển qua
         #trường hợp lấy 3 nguyên liệu khác nhau
-        if sum(self.stocks.values())==10:
+        
+        for card in listcard:
             if len(listcard) >0:
-                card_target=listcard[0]
+              if card.score>max1: 
+                  max1=card.score
+        for card in listcard:
+            if card.score==max1:
+                card_target=card
                 return stocks, card_target, stock_return
+        # if sum(self.stocks.values())==10:
+        #     if len(listcard) >0:
+        #         card_target=listcard[-1]
+        #         return stocks, card_target, stock_return
         for stock in card_st:
             if card_st[stock] - self.stocks[stock] - self.stocks_const[stock] >1:
                 if state['Board'].stocks[stock] > 3:
