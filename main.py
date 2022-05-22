@@ -27,7 +27,7 @@ def check_winner(state):
         return player_win.name, score_max, state['Turn']+1
     else:
         return "None"
-turn = 60
+turn = 200
 def main():
     env = gym.make('gym_splendor-v0')
     env.reset()

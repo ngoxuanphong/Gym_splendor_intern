@@ -82,8 +82,6 @@ class Agent(Player):
                         and state['Board'].stocks[stock] > 0:
                     if stock not in stocks and len(stocks) < 2:
                         stocks.append(stock)
-        print(stocks)
-
         return stocks
 
 
@@ -148,15 +146,14 @@ class Agent(Player):
                                 sum_d_d += card1.stocks[stock_in_card]
                             elif stock_in_card in ["green", "blue"]:
                                 sum_l_l += card1.stocks[stock_in_card]
-        print("sum_d_d: {}".format(sum_d_d))
-        print("sum_l_l: {}".format(sum_l_l))
+       
 
         # Xác định lối chơi
         if sum_d_d > sum_l_l and state["Turn"] < 5:
             self.pathway = True
         elif sum_d_d <= sum_l_l and state["Turn"] < 5:
             self.pathway = False
-        print("Pathway: {}".format(self.pathway))
+        print(" ---------- Pathway ----------- : {}".format(self.pathway))
         if self.pathway:    
             # Chơi tam tấu d/d/t
             # Chơi style 1-2-3-4-5 hoặc 2-2-2-4-5
@@ -170,6 +167,7 @@ class Agent(Player):
             needed_card_l = []
             
 
+            # -------------------------------------------------------------------------------
             # Tier I
             needed_card_black = []
             needed_card_red = []
@@ -237,6 +235,9 @@ class Agent(Player):
             needed_card_l_II_III = needed_card_l_II + needed_card_l_III
             needed_card_l_II_III.sort(key = lambda x: x.score / sum(list(x.stocks.values())), reverse=True)
             needed_card_l = self.card_upside_down + needed_card_l_II_III + needed_card_l_I
+            needed_card_l.sort(key = lambda x: x.score)
+            needed_card_l.sort(key = lambda x: sum(list(x.stocks.values())))
+
 
             for card_in_list in needed_card_l_I:
                 print("\tID: {} \tScore: {} \tStocks {} \t Type Stocks: {}".format\
@@ -245,17 +246,18 @@ class Agent(Player):
             for card_in_list in needed_card_l_II_III:
                 print("\tID: {} \tScore: {} \tStocks {} \t Type Stocks: {}".format\
                 (card_in_list.id, card_in_list.score, card_in_list.stocks, card_in_list.type_stock))            
+            # -------------------------------------------------------------------------------
+
           
             # -------------------------------------------------------------------------------------------
-            # # Nếu có 9 tài nguyên, úp thẻ tiếp theo trong needed_card
-            
+            # Nếu có 9 tài nguyên, úp thẻ tiếp theo trong needed_card
             sum_self_st = 0
             for i in self.stocks:
                     sum_self_st += self.stocks[i]
             if sum_self_st == 9:
                 # Úp thẻ
-                if self.check_upsite_down(needed_card_l_II_III[0]):
-                    return [], needed_card_l_II_III[0], []
+                if self.check_upsite_down(needed_card_l[0]):
+                    return [], needed_card_l[0], []
             # Nếu có 10 tài nguyên, kiểm tra xem có lấy được thẻ nào trên bàn hay không?
             elif sum_self_st == 10:
                 for card3 in needed_card_l:
@@ -266,15 +268,21 @@ class Agent(Player):
                                 for card1 in state["Board"].dict_Card_Stocks_Show[type_card]:
                                     if self.check_get_card_no_auto_color(card1) or self.check_get_card(card1):
                                             return [], card1, []
-            
+            # -------------------------------------------------------------------------------
+
+
+            # -------------------------------------------------------------------------------
             # Nếu có nhiều hơn 4 thẻ loại 1, không lấy thẻ loại 1 nữa
             num_tier1 = 0
             for card4 in self.card_open + self.card_upside_down:
                 if card4.score < 2:
                         num_tier1 += 1
-            if num_tier1 > 5:
+            if num_tier1 > 4:
                 needed_card_l_I = []
+                print("----------- Kết thúc tier1 -------------")
+            # -------------------------------------------------------------------------------
 
+            # -------------------------------------------------------------------------------
             # Kiểm tra xem có thẻ loại I có 1 điểm mà có type stock trong ["đen", "đỏ", "trắng"]
             if len(needed_card_l_I) != 0:
                 for card1 in needed_card_l_I:
@@ -287,9 +295,10 @@ class Agent(Player):
                         if self.check_upsite_down(card1) and self.score == 0 \
                             and self.card_upside_down[0].score != 1:
                             return stocks, card1, stock_return
+            # -------------------------------------------------------------------------------
 
 
-
+            # -------------------------------------------------------------------------------
             # Nếu có thẻ đang úp điểm = 1, lấy tài nguyên để mở thẻ đó
             if len(self.card_upside_down) != 0:
                 target_card = self.card_upside_down[0]
@@ -321,17 +330,18 @@ class Agent(Player):
                         # Trả về nguyên liệu không trong target card
                         stock_return = self.return_stock_not_in_target_card\
                             (needed_card_l_I, len(stocks) - sum_self_st > 10)
-        
+            # -------------------------------------------------------------------------------
 
+            # -------------------------------------------------------------------------------
             # Không có thẻ đang úp điểm = 1 loại 1, target đến thẻ đầu tiên trong needed_card_list
             else:
                 if len(needed_card_l_I) > 0:
                     target_list = needed_card_l_I
                 else:
-                    target_list = needed_card_l_II_III
+                    target_list = needed_card_l
                 target_list += self.card_upside_down
 
-                if self.check_get_card(target_list[0]):
+                if len(target_list) != 0 and self.check_get_card(target_list[0]):
                     card = target_list[0]
                     stocks = []
                     stock_return = []
@@ -340,7 +350,10 @@ class Agent(Player):
                     # Lấy tài nguyên để mở thẻ đó
                     # Lấy 2 tài nguyên nếu cần và nếu có thể, nếu không thể lấy 2, lấy mỗi 
                     # loại 1 tài nguyên theo các thẻ trong list các thẻ cần lấy (needed card)
-                    stocks = self.get_stock_for_target_card(target_list[0], state, stocks)
+                    if len(target_list) != 0:
+                        stocks = self.get_stock_for_target_card(target_list[0], state, stocks)
+                    else:
+                        stocks = self.get_stock_for_target_card(state["Board"].dict_Card_Stocks_Show["II"][0], state, stocks)
                     if (len(stocks) == 2 and stocks[0] != stocks[1]) or len(stocks) < 2:
                         for card in needed_card_l_I:
                             stocks = self.get_stock_for_target_card(card, state, stocks)
@@ -359,7 +372,8 @@ class Agent(Player):
                     if len(stocks) + sum_self_st > 10:
                         # Trả về nguyên liệu không trong target card
                         stock_return = self.return_stock_not_in_target_card(target_list, len(stocks) - sum_self_st > 10)
-        
+            # -------------------------------------------------------------------------------
+
         else: 
             # Chơi tam tấu l/l/t
             # Chơi style 1-2-3-4-5 hoặc 2-2-2-4-5
@@ -370,74 +384,81 @@ class Agent(Player):
             
             # -------------------------------------------------------------------------------------------
             # Tạo list các thẻ cần lấy cho tam tấu d/d/t
+# Tạo list các thẻ cần lấy cho tam tấu d/d/t
             needed_card_l = []
             
 
+            # -------------------------------------------------------------------------------
             # Tier I
-            needed_card_blue = []
-            needed_card_green = []
+            needed_card_black = []
+            needed_card_red = []
             needed_card_white = []
             needed_card_l_I = []
 
             for card1 in state["Board"].dict_Card_Stocks_Show["I"]:
-                if card1.type_stock == "blue":
-                   needed_card_blue.append(card1)
-                elif card1.type_stock == "green":
-                    needed_card_green.append(card1)
+                if card1.type_stock == "black":
+                   needed_card_black.append(card1)
+                elif card1.type_stock == "red":
+                    needed_card_red.append(card1)
                 elif card1.type_stock == "white":
                     needed_card_white.append(card1)
-            needed_card_blue.sort(key = lambda x: sum(list(x.stocks.values())))
-            needed_card_blue.sort(key = lambda x: x.score, reverse=True)
-            needed_card_green.sort(key = lambda x: sum(list(x.stocks.values())))
-            needed_card_green.sort(key = lambda x: x.score, reverse=True)
+            
+            needed_card_black.sort(key = lambda x: sum(list(x.stocks.values())))
+            needed_card_black.sort(key = lambda x: x.score, reverse=True)
+            needed_card_red.sort(key = lambda x: sum(list(x.stocks.values())))
+            needed_card_red.sort(key = lambda x: x.score, reverse=True)
             needed_card_white.sort(key = lambda x: sum(list(x.stocks.values())))
             needed_card_white.sort(key = lambda x: x.score, reverse=True)
-            needed_card_l_I = needed_card_white + needed_card_blue + needed_card_green
+            needed_card_l_I = needed_card_white + needed_card_black + needed_card_red
             needed_card_l_I.sort(key = lambda x: sum(list(x.stocks.values())))
             needed_card_l_I.sort(key = lambda x: x.score, reverse=True)
-
+            
             # Tier II
-            needed_card_blue = []
-            needed_card_green = []
+            needed_card_black = []
+            needed_card_red = []
             needed_card_white = []
             needed_card_l_II = []
             for card1 in state["Board"].dict_Card_Stocks_Show["II"]:
                 if card1.score > 0:    
-                    if card1.type_stock == "blue" and sum(card1.stocks.values()) in [8,5,6]:
-                        needed_card_blue.append(card1)
-                    elif card1.type_stock == "green":
-                        needed_card_green.append(card1)
-
-            needed_card_blue.sort(key = lambda x: sum(list(x.stocks.values())))
-            needed_card_blue.sort(key = lambda x: x.score, reverse=True)
-            needed_card_green.sort(key = lambda x: sum(list(x.stocks.values())))
-            needed_card_green.sort(key = lambda x: x.score, reverse=True)
+                    if card1.type_stock == "black" and sum(card1.stocks.values()) in [5,6]:
+                        needed_card_black.append(card1)
+                    elif card1.type_stock == "red" and sum(card1.stocks.values()) in [5,6,8]:
+                        needed_card_red.append(card1)
+                    elif card1.type_stock == "white":
+                        needed_card_white.append(card1)
+            needed_card_black.sort(key = lambda x: sum(list(x.stocks.values())))
+            needed_card_black.sort(key = lambda x: x.score, reverse=True)
+            needed_card_red.sort(key = lambda x: sum(list(x.stocks.values())))
+            needed_card_red.sort(key = lambda x: x.score, reverse=True)
             needed_card_white.sort(key = lambda x: sum(list(x.stocks.values())))
             needed_card_white.sort(key = lambda x: x.score, reverse=True)
-            needed_card_l_II = needed_card_white + needed_card_blue + needed_card_green
+            needed_card_l_II = needed_card_white + needed_card_black + needed_card_red
             needed_card_l_II.sort(key = lambda x: x.score, reverse=True)
 
 
             # Tier III
-            needed_card_blue = []
-            needed_card_green = []
+            needed_card_black = []
             needed_card_red = []
+            needed_card_white = []
             needed_card_l_III = []
             for card1 in state["Board"].dict_Card_Stocks_Show["III"]:
                 if card1.score > 3:    
-                    if card1.type_stock == "blue":
-                        needed_card_blue.append(card1)
-                    elif card1.type_stock == "green":
-                        needed_card_green.append(card1)
-                    elif card1.type_stock == "red":
-                        needed_card_red.append(card1)
-            needed_card_blue.sort(key = lambda x: sum(list(x.stocks.values())))
-            needed_card_green.sort(key = lambda x: sum(list(x.stocks.values())))
+                    if card1.type_stock == "black" and sum(card1.stocks.values()) in [10, 7]:
+                        needed_card_black.append(card1)
+                    elif card1.type_stock == "white":
+                        needed_card_white.append(card1)
+            needed_card_black.sort(key = lambda x: sum(list(x.stocks.values())))
             needed_card_red.sort(key = lambda x: sum(list(x.stocks.values())))
-            needed_card_l_III = needed_card_red + needed_card_blue + needed_card_green
+            needed_card_white.sort(key = lambda x: sum(list(x.stocks.values())))
+            needed_card_l_III = needed_card_white + needed_card_black + needed_card_red
+
 
             needed_card_l_II_III = needed_card_l_II + needed_card_l_III
-            needed_card_l_II_III.sort(key = lambda x: sum(list(x.stocks.values()))/x.score)
+            needed_card_l_II_III.sort(key = lambda x: x.score / sum(list(x.stocks.values())), reverse=True)
+            needed_card_l = self.card_upside_down + needed_card_l_II_III + needed_card_l_I
+            needed_card_l.sort(key = lambda x: x.score)
+            needed_card_l.sort(key = lambda x: sum(list(x.stocks.values())))
+
 
             for card_in_list in needed_card_l_I:
                 print("\tID: {} \tScore: {} \tStocks {} \t Type Stocks: {}".format\
@@ -446,31 +467,61 @@ class Agent(Player):
             for card_in_list in needed_card_l_II_III:
                 print("\tID: {} \tScore: {} \tStocks {} \t Type Stocks: {}".format\
                 (card_in_list.id, card_in_list.score, card_in_list.stocks, card_in_list.type_stock))            
+            # -------------------------------------------------------------------------------
 
-            # for card_in_list in needed_card_l_III:
-            #     print("\tID: {} \tScore: {} \tStocks {} \t Type Stocks: {}".format\
-            #     (card_in_list.id, card_in_list.score, card_in_list.stocks, card_in_list.type_stock))            
+          
             # -------------------------------------------------------------------------------------------
+            # Nếu có 9 tài nguyên, úp thẻ tiếp theo trong needed_card
+            sum_self_st = 0
+            for i in self.stocks:
+                    sum_self_st += self.stocks[i]
+            if sum_self_st == 9:
+                # Úp thẻ
+                if self.check_upsite_down(needed_card_l[0]):
+                    return [], needed_card_l[0], []
+            # Nếu có 10 tài nguyên, kiểm tra xem có lấy được thẻ nào trên bàn hay không?
+            elif sum_self_st == 10:
+                for card3 in needed_card_l:
+                    if self.check_get_card_no_auto_color(card3) or self.check_get_card(card3):
+                        return [], card3, []
+                for type_card in state["Board"].dict_Card_Stocks_Show:
+                            if type_card != "Noble":
+                                for card1 in state["Board"].dict_Card_Stocks_Show[type_card]:
+                                    if self.check_get_card_no_auto_color(card1) or self.check_get_card(card1):
+                                            return [], card1, []
+            # -------------------------------------------------------------------------------
 
 
+            # -------------------------------------------------------------------------------
+            # Nếu có nhiều hơn 4 thẻ loại 1, không lấy thẻ loại 1 nữa
+            num_tier1 = 0
+            for card4 in self.card_open + self.card_upside_down:
+                if card4.score < 2:
+                        num_tier1 += 1
+            if num_tier1 > 4:
+                needed_card_l_I = []
+                print("----------- Kết thúc tier1 -------------")
+            # -------------------------------------------------------------------------------
 
-            # Kiểm tra xem có thẻ loại I có 1 điểm mà có type stock trong ["lục", "lam", "trắng"]
-            for card1 in needed_card_l_I:
-                if card1.score == 1 and card1.type_stock in ["green", "blue", "white"]:
-                    # Úp thẻ
-                    if self.check_upsite_down(card1) and len(self.card_upside_down) == 0 and self.score == 0:
-                        return stocks, card1, stock_return
-                    if self.check_upsite_down(card1) and self.score == 0 and self.card_upside_down[0].score != 1:
-                        return stocks, card1, stock_return
+            # -------------------------------------------------------------------------------
+            # Kiểm tra xem có thẻ loại I có 1 điểm mà có type stock trong ["đen", "đỏ", "trắng"]
+            if len(needed_card_l_I) != 0:
+                for card1 in needed_card_l_I:
+                    if card1.score == 1 and (card1.type_stock in ["red", "black", "white"]) and self.score != 1:
+                        # Úp thẻ
+                        if self.check_upsite_down(card1) \
+                            and len(self.card_upside_down) == 0 and self.score == 0:
+                            return stocks, card1, stock_return
 
-            
-            
-            
-            
-            
-            
+                        if self.check_upsite_down(card1) and self.score == 0 \
+                            and self.card_upside_down[0].score != 1:
+                            return stocks, card1, stock_return
+            # -------------------------------------------------------------------------------
+
+
+            # -------------------------------------------------------------------------------
             # Nếu có thẻ đang úp điểm = 1, lấy tài nguyên để mở thẻ đó
-            if len(self.card_upside_down) != 0 and self.card_upside_down[0].score == 1:
+            if len(self.card_upside_down) != 0:
                 target_card = self.card_upside_down[0]
                 if self.check_get_card(target_card):
                     print("Đã lấy thẻ đang úp 1 điểm")
@@ -483,23 +534,24 @@ class Agent(Player):
                     # Lấy 2 tài nguyên nếu cần và nếu có thể, nếu không thể lấy 2, lấy mỗi 
                     # loại 1 tài nguyên theo các thẻ trong list các thẻ cần lấy (needed card)
                     stocks = self.get_stock_for_target_card(target_card, state, stocks)
-                
-            # Không có thẻ đang úp
-            else:
-                target_card = needed_card_l_I[0]
-                if self.check_get_card(target_card):
-                    card = target_card
-                    stocks = []
-                    stock_return = []
-                    return stocks, card, stock_return
-                else:    
-                    # Lấy tài nguyên để mở thẻ đó
-                    # Lấy 2 tài nguyên nếu cần và nếu có thể, nếu không thể lấy 2, lấy mỗi 
-                    # loại 1 tài nguyên theo các thẻ trong list các thẻ cần lấy (needed card)
-                    stocks = self.get_stock_for_target_card(target_card, state, stocks)
+                    if (len(stocks) == 2 and stocks[0] != stocks[1]) or len(stocks) < 2:
+                        for card1 in needed_card_l_I:
+                            stocks = self.get_stock_for_target_card(card1, state, stocks)
+                        for card in needed_card_l_II_III:
+                            stocks = self.get_stock_for_target_card(card, state, stocks)
+                    # Nếu hết tài nguyên, úp thẻ trong need_card
+                    if len(stocks) == 0:
+                        if len(needed_card_l_I) != 0 and self.check_upsite_down(needed_card_l_I[0]):
+                            return stocks, needed_card_l_I[0], []
+                        if len(needed_card_l_II_III) != 0 and self.check_upsite_down(needed_card_l_II_III[0]):
+                            return stocks, needed_card_l_II_III[0], []
 
-                    
-
+                    # Nếu thừa nguyên liệu, trả về nguyên liệu KHÔNG có trong target card
+                    if len(stocks) + sum_self_st > 10:
+                        # Trả về nguyên liệu không trong target card
+                        stock_return = self.return_stock_not_in_target_card\
+                            (needed_card_l_I, len(stocks) - sum_self_st > 10)
+            # -------------------------------------------------------------------------------
 
 
 
