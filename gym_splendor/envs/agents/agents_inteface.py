@@ -10,4 +10,4 @@ from gym_splendor.envs.agents import Long as a4
 from gym_splendor.envs.agents import Long1 as a5
 
 # ListPlayer = [a1.Agent("Trang"),a2.Agent("Trang2"),a3.Agent("Dat"),a4.Agent("longlee")]
-ListPlayer = [a1.Agent("Trang"),a2.Agent("Trang2"),a3.Agent("Dat"),a5.Agent("Long")]
+ListPlayer = [a1.Agent("Trang"),a2.Agent("Trang2"),a3.Agent("Dat"),a4.Agent("Long")]

@@ -36,6 +36,8 @@ import math
 #
 
 
+# 
+
 class Agent(Player):
     def __init__(self, name):
         super().__init__(name)
@@ -46,7 +48,6 @@ class Agent(Player):
         stock_return = []
 
 
-
         # Hiển thị các thẻ có trên bàn
         for type_card in state["Board"].dict_Card_Stocks_Show:
             if type_card != "Noble":
@@ -55,46 +56,6 @@ class Agent(Player):
                     (type_card, card1.id, card1.score, card1.stocks, card1.type_stock))
 
 
-        # Hiển thị các thẻ đã lật và nguyên liệu đang có
-        if len(self.card_open) != 0:
-            print("Các thẻ đã lật của Long: ")
-            for i in self.card_open:
-                print("Score: {}".format(i.score), end = ",")
-        else:
-            print("Long chưa lật thẻ nào")
-        print("\nNguyên liệu hữu hạn: {}".format(self.stocks))
-        print("Nguyên liệu vĩnh viễn: {}".format(self.stocks_const))
-
-        # Hiển thị các thẻ đang úp
-        if len(self.card_upside_down) != 0:
-            print("Các thẻ đang úp của Long là: ")    
-            for i in self.card_upside_down:
-                print("Score: {}".format(i.score))
-       
-
-        # Kiểm tra xem có thẻ loại I có giá trị 1 điểm hay không? Nếu có => úp thẻ
-        # Chỉ úp thẻ loại I khi chua có điểm, 1 ván lấy duy nhất 1 thẻ 1 điểm loại I
-        if self.score < 1 and len(self.card_upside_down) == 0:
-            for type_card in state["Board"].dict_Card_Stocks_Show:
-                if type_card == "I":
-                    for card1 in state["Board"].dict_Card_Stocks_Show[type_card]:
-                        if card1.score == 1:
-                            if self.check_upsite_down(card1):
-                                stocks = stock_return = []
-                                card = card1
-                                return stocks, card, stock_return
-            
-        # Nếu đã úp thẻ loại I có 1 điểm
-        if len(self.card_upside_down) != 0 and self.card_upside_down[0].score == 1:
-            target_card = self.card_upside_down[0]
-            # Nếu có thể mở thẻ đó
-            if self.check_get_card(target_card):
-                stocks = stock_return = []
-                card = target_card
-                return stocks, card, stock_return
-            else:
-                # Lấy tài nguyên để mở thẻ đang úp (LƯU Ý ĐANG CÓ 1 THẺ VÀNG)
-                
 
 
 
