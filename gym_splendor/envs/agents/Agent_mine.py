@@ -11,14 +11,6 @@ import math
 class Agent(Player):
     def __init__(self, name):
         super().__init__(name)
-    # def check_get(self, card):
-    #     card_st=card.stocks
-    #     for stock in card_st:
-    #         if card_st[stock]-self.stocks[stock]-self.stocks_const[stock]>0:
-    #             return False
-    #     return True 
-    #     return card
-
     def action(self, state):
         global d
         stocks = []
@@ -51,6 +43,9 @@ class Agent(Player):
                     print(card.id, card.stocks, card.score, card.type_stock)
                     if self.check_get_card(card):
                         listcard.append(card)
+        for card in self.card_upside_down:
+            if self.check_get_card(card):
+                listcard.append(card)
         print(listcard)
         #stocks là một dict nguyên liệu của thẻ đó
         card_st = card_target.stocks
@@ -80,7 +75,7 @@ class Agent(Player):
                     stocks.append(stock)
                     d=1
                     break
-                elif state['Board'].stocks[stock] <= 3:
+                elif 0< state['Board'].stocks[stock] <= 3:
                     stocks.append(stock)
                     break
         if d!=1: 
@@ -104,26 +99,10 @@ class Agent(Player):
         print(stocks)
         print(self.stocks)
         print(stock_return)
-        # Trả nguyên liệu khi vượt quá 10 
-
-        # if sum(self.stocks.values()) >10:
-        #     print("Tra nguyen lieu di ban ei")
-        #     for stock in card_st: 
-        #         if card_st[stock]<stocks[stock] and stock!='auto_color':
-        #             stock_return.append(stock)
-        # if sum(self.stocks.values()) + len(stock_return) > 10:
-        #     for stock in stock_return:
-        #         self.stocks[stock] = self.stocks[stock] - 1
-        #     state["Board"].postStock(stock_return)
         print(sum(self.stocks.values()))
         
         print(card_target.id)
         # card=card_target
-        # In ra tất cả những thẻ có trên bàn, in ra thẻ có điểm nhưng tốn ít nhiên liệu nhất
-        #Gán card taget là thẻ đầu tiên loại 1 trên bàn
-        # if self.check_get(card):
-        #     card=card_st
-        #     print("ok")
         #In ra nguyên liệu mặc định của người chơi đó(nguyên liệu thẻ đã lấy)
         print(self.stocks_const)
         # stocks là một list các nguyên liệu cần ví dụ: ['red', 'red'] hoặc ['blue', 'green', 'black']
