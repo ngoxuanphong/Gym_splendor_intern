@@ -3,27 +3,7 @@ from gym_splendor.envs.base.board import Board
 from ..base.player import Player
 import random
 import math
-#board
-#dict_card_stocks_show: thẻ mở
-#stocks: nguyen liệu
 
-#player
-#score: self.score
-#nguyên liệu: self.stocks
-#nguyên liệu mặc định: self.stocks_const
-#thẻ đã mở: self.card_open
-#thẻ đã úp: self.card_upsidedown
-#thẻ noble: self.card_noble
-
-#card
-#id: mã của thẻ vd:[I][0]
-#stocks: nguyên liệu cần để lấy thẻ
-#score: điểm ghi trên thẻ
-#type.stocks: nguyên liệu mặc định của thẻ
-
-# Agent(self,state)
-#State = {'Turn':...,"Board":...,"Player":...}
-#btap: in ra tất cả các thẻ có trên bàn, in ra thẻ có điểm mà trả ít nguyên liệu.
 class Agent(Player):
     def __init__(self, name):
         super().__init__(name)
@@ -107,6 +87,7 @@ class Agent(Player):
             card_selected = card_selected_best_2
             card_stocks = card_stocks_best_2
         elif len(list_card_id_avai) >0:
+    
             for type_card in state['Board'].dict_Card_Stocks_Show:
                 if type_card != 'Noble':
                     for card in state['Board'].dict_Card_Stocks_Show[type_card]:
@@ -165,15 +146,6 @@ class Agent(Player):
                         stock_return.append(stock)
         
 
-
-        # print("Stocks đã lấy:")
-        # print(stocks)
-        # print(self.stocks)
-        # print("Lượng nguyên liệu đang có trên bàn:", end=" ")
-        # print(sum(self.stocks.values()))
-        # print(stock_return)
-        # print("Thẻ đã chọn:")
-        
         card = card_selected                    
 
 

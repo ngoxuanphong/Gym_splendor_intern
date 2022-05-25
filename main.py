@@ -27,4 +27,4 @@ def main():
     
 #     if __name__ == '__main__':
 #         main()
-print(Counter(main() for i in range(100)))
+print(Counter(main() for i in range(1000)))
