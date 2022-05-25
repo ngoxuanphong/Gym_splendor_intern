@@ -12,9 +12,9 @@ format state:
 3 player.stock_const
 4 list_card:
     -chưa xuất hiện: 0
-    -trên bàn chơi: 1
-    -mình đã lấy: 2
-    -mình đang úp: 3
+    -trên bàn chơi:  1
+    -mình đã lấy:    2
+    -mình đang úp:   3
 '''
 file_train = pd.read_csv('./TRAIN_HIEU/file_train.csv')
 

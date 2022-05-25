@@ -1,42 +1,40 @@
 from ..base.player import Player
+from ..base.board import Board
+from ..base.card import Card
 import random
+import math
+from collections import Counter
 from copy import deepcopy
 
-
-class Agent(Player):
+class Agent(Player, Card, Board):
     def __init__(self, name):
         super().__init__(name)
 
     def action(self, state):
-
-        # print(self.check_winner(state))
-
-        dict_the_lay_ngay = self.dict_the_lay_ngay_func(state['Board'])
+        stocks = []
+        card = None
+        stock_return = []
+        # gán
+        board = state['Board']
+        tn_target_final = self.tai_nguyen_target_func(state['Board'])
+        the_lay_ngay = self.dict_the_lay_ngay_func(board)  # dict
         mau_the_quan_trong = self.mau_the_quan_trong_func(state['Board'])
+        print("list the lay ngay : ", the_lay_ngay)
+        #chọn thẻ lấy ngay
+        mau_the_vinh_vien_da_so_huu = {
+            'red': 0, 'blue': 0, 'green': 0, 'white': 0, 'black': 0}
+        for mau_the,ds_the in the_lay_ngay.items():
+            if mau_the in tn_target_final :
+                for car in ds_the:
+                    if car.type_stock == mau_the and mau_the_vinh_vien_da_so_huu[mau_the] <=3:
+                        card = car
+                        mau_the_vinh_vien_da_so_huu[car.type_stock] +=1
+                        return None, card, None#---------------------------------------------------------------
 
-        sl_the_lay_ngay = sum([dict_the_lay_ngay[mau].__len__() for mau in dict_the_lay_ngay.keys()])
-        if sl_the_lay_ngay != 0:
-            for sub_list in mau_the_quan_trong:
-                for mau in sub_list:
-                    if dict_the_lay_ngay[mau].__len__() != 0:
-                        card = self.chon_the_gia_tri_cao(dict_the_lay_ngay[mau])
-                        # print(card.stocks, card.score)
-                        return [], card, []
-
-            list_the_lay_ngay = []
-            for mau in dict_the_lay_ngay.keys():
-                if dict_the_lay_ngay[mau].__len__() != 0:
-                    list_the_lay_ngay += dict_the_lay_ngay[mau]
-
-            card = self.chon_the_gia_tri_cao(list_the_lay_ngay)
-            if card.score > 1:
-                # print(card.stocks, card.score)
-                return [], card, []
-
+        #tim nguyen lieu tra
         list_co_the_lay = self.the_co_the_lay_func(state['Board'], mau_the_quan_trong)
         if list_co_the_lay.__len__() != 0:
             target = list_co_the_lay[0]
-            stocks = []
             mau_target_thieu = [mau for mau in target['nl_thieu'].keys() if
                                 mau != 'auto_color' and target['nl_thieu'][mau] != 0]
 
@@ -94,10 +92,9 @@ class Agent(Player):
                 stocks_return.remove(i)
             print(stocks, stocks_return, '3333')
             return stocks, None, stocks_return
-
         if (state['Board'].stocks['auto_color'] > 0 and self.card_upside_down.__len__() < 3) or (
-                self.card_upside_down.__len__() < 3 and sum(state['Board'].stocks.values()) == state['Board'].stocks[
-            'auto_color']):
+            self.card_upside_down.__len__() < 3 and sum(state['Board'].stocks.values()) ==
+            state['Board'].stocks['auto_color']):
             card_up = self.Tim_the_up(state['Board'], mau_the_quan_trong)
             if card_up != None:
                 stocks_return = []
@@ -106,10 +103,12 @@ class Agent(Player):
                 print(stocks_return, card_up, '4444')
                 return [], card_up, stocks_return
 
+
+
         stocks = []
         for i in range(min(3, 10 - sum(self.stocks.values()))):
             temp_list = [mau for mau in state['Board'].stocks.keys() if
-                         mau not in (['auto_color'] + stocks) and state['Board'].stocks[mau] > 0]
+                             mau not in (['auto_color'] + stocks) and state['Board'].stocks[mau] > 0]
             if temp_list.__len__() > 0:
                 stocks.append(random.choice(temp_list))
         print(stocks, '5555')
@@ -118,7 +117,7 @@ class Agent(Player):
 
         for i in range(3):
             temp_list = [mau for mau in state['Board'].stocks.keys() if
-                         mau not in (['auto_color'] + stocks) and state['Board'].stocks[mau] > 0]
+                        mau not in (['auto_color'] + stocks) and state['Board'].stocks[mau] > 0]
             if temp_list.__len__() > 0:
                 stocks.append(random.choice(temp_list))
 
@@ -132,6 +131,15 @@ class Agent(Player):
             pl_st[dfghjk] -= 1
         print(stocks, stocks_return, '6666', self.card_upside_down.__len__())
         return stocks, None, stocks_return
+
+            #kiểm tra xem có mua được thẻ không=>list thẻ có thể mua
+
+               # list_the_up_can_mo = []
+                #for card in self.card_upside_down:
+                 #   if not self.check_get_card(card):
+                  #      #list_the_up_can_mo
+                   #     print(" ")
+
 
     def Tim_the_up(self, board, mau_the_quan_trong):
         list_card_can_check = []
@@ -162,6 +170,96 @@ class Agent(Player):
                 return card
 
         return None
+    def dict_the_lay_ngay_func(self, board):
+        dict_card = {
+            'red': [], 'blue': [], 'green': [], 'white': [], 'black': []
+        }
+
+        for card in self.card_upside_down:
+            if self.check_get_card(card):
+                dict_card[card.type_stock].append(card)
+
+        for type_card in board.dict_Card_Stocks_Show.keys():
+            if type_card != 'Noble':
+                for card in board.dict_Card_Stocks_Show[type_card]:
+                    if self.check_get_card(card):
+                        dict_card[card.type_stock].append(card)
+
+        return dict_card
+    def tai_nguyen_target_func(self, board):
+        # lấy list tài nguyên target cho toàn trận từ hàng noble.
+        noble_3_tn_tam = []
+        noble_2_tn = {}  # các loại tài nguyên xuất hiện trong thẻ noble chỉ có 2 tài nguyên_và số thẻ mà nó nằm trong
+        noble_3_tn = {'red': 0, 'blue': 0, 'green': 0, 'black': 0,
+                      'white': 0}  # các loại tài nguyên xuất hiện trong thẻ noble chỉ có 3 tài nguyên
+        # số thẻ mà nó nằm trong
+        tn_target_final = []  # tài nguyên chọn để build thực sự.
+
+        for type_card in board.dict_Card_Stocks_Show:
+            if type_card == 'Noble':
+                list_tn_target_ = []
+                for card in board.dict_Card_Stocks_Show['Noble']:
+                    # tìm các thẻ noble chứa 2 tn build
+                    count_card_tn_eval_2 = 0
+                    for k in card.stocks.keys():
+                        if card.stocks[k] > 0:
+                            count_card_tn_eval_2 += 1
+
+                    if count_card_tn_eval_2 == 2:
+                        for k in card.stocks.keys():
+                            if card.stocks[k] > 0:
+                                list_tn_target_.append(k)
+                        noble_2_tn = dict((x, list_tn_target_.count(x)) for x in set(list_tn_target_))
+                    else:
+                        noble_3_tn_tam.append(card.stocks)
+                # lưu tất cả loại tài nguyên của thẻ noble có 3 tài nguyên build vào noble_3_tn
+                for tn_build_each_card_IV in noble_3_tn_tam:
+                    if tn_build_each_card_IV['red'] > 0:
+                        noble_3_tn['red'] += 1
+                    if tn_build_each_card_IV['blue'] > 0:
+                        noble_3_tn['blue'] += 1
+                    if tn_build_each_card_IV['green'] > 0:
+                        noble_3_tn['green'] += 1
+                    if tn_build_each_card_IV['black'] > 0:
+                        noble_3_tn['black'] += 1
+                    if tn_build_each_card_IV['white'] > 0:
+                        noble_3_tn['white'] += 1
+
+                noble_2_tn = dict(sorted(noble_2_tn.items(), key=lambda x: x[1], reverse=True))
+                noble_3_tn = dict(sorted(noble_3_tn.items(), key=lambda x: x[1], reverse=True))
+                print("noble_2_tn", noble_2_tn)  # loại thẻ noble chỉ có 2 tài nguyên
+                print("noble_3_tn", noble_3_tn)  # loại thẻ noble chỉ có 3 tài nguyên
+
+                # ưu tiền target tài nguyên theo các thẻ noble chỉ có 2 loại tài nguyên build và có loại tài nguyên xuất hiện trong noble_3_tn
+
+                if len(noble_2_tn) != 0:
+                    if len(noble_2_tn) == 2:  # chỉ có 1 thẻ noble 2 tn build
+                        for x in noble_2_tn.keys():
+                            tn_target_final.append(x)
+                    else:  # nếu len(noble_2_tn) > 2, tức có >= 2 thẻ noble 2 tn build
+                        # nếu tất cả giá trị = 1 thì xét sang list kia
+                        if list(noble_2_tn.values())[0] == 1:  # list chứa toàn value = 1
+                            for k in noble_2_tn.keys():
+                                if k in noble_3_tn.keys():
+                                    if len(tn_target_final) < 3:
+                                        tn_target_final.append(k)
+                        else:
+                            for m in noble_2_tn.keys():
+                                if noble_2_tn[m] >= 2 and len(tn_target_final) < 3:
+                                    tn_target_final.append(m)
+                            if len(tn_target_final) < 3:
+                                for k in noble_3_tn.keys():
+                                    if k in tn_target_final:
+                                        continue
+                                    else:
+                                        if len(tn_target_final) < 3:
+                                            tn_target_final.append(k)
+                print("tn_target_final : ",
+                      tn_target_final)
+
+                ####################cần tối ưu: giả sử noble_2_tn có value= [2,1,1,1]. Sau khi lấy key của value 2
+                # ta cần truy cập đến thẻ chứa tài nguyên key=2 để lấy nốt cái tài nguyên còn lại
+        return tn_target_final
 
     def Tim_nl_tra(self, card, stocks):
         nl_hien_tai = deepcopy(self.stocks)
@@ -204,6 +302,57 @@ class Agent(Player):
                         break
 
         return list_stock_return
+
+    def mau_the_quan_trong_func(self, board):
+        if board.dict_Card_Stocks_Show['Noble'].__len__() == 0:
+            return [[], []]
+
+        temp = ["red", "blue", "green", "white", "black"]
+
+        sl_bien = {}
+        for mau in temp:
+            list_temp = [car.stocks[mau] for car in board.dict_Card_Stocks_Show['Noble']]
+            max_ = max(list_temp)
+            if max_ > 0:
+                sl_bien[mau] = max_
+
+        mau_dat_sl_bien = []
+        for mau in sl_bien.keys():
+            if self.stocks_const[mau] >= sl_bien[mau]:
+                mau_dat_sl_bien.append(mau)
+
+        if mau_dat_sl_bien.__len__() == 0:
+            mau_can_lay_1 = list(sl_bien.keys())
+            mau_can_lay_2 = []
+        elif mau_dat_sl_bien.__len__() == 1:
+            mau_can_lay_1 = []
+            for car in board.dict_Card_Stocks_Show['Noble']:
+                if car.stocks[mau_dat_sl_bien[0]] != 0:
+                    for mau in temp:
+                        if mau not in (mau_dat_sl_bien + mau_can_lay_1) and car.stocks[mau] > 0:
+                            mau_can_lay_1.append(mau)
+
+            mau_can_lay_2 = [mau for mau in sl_bien.keys() if mau not in (mau_dat_sl_bien + mau_can_lay_1)]
+        else:
+            mau_can_lay_1 = []
+            a = mau_dat_sl_bien.__len__()
+            for i in range(a):
+                for j in range(i + 1, a):
+                    mau1 = mau_dat_sl_bien[i]
+                    mau2 = mau_dat_sl_bien[j]
+                    for car in board.dict_Card_Stocks_Show['Noble']:
+                        if car.stocks[mau1] != 0 and car.stocks[mau2] != 0:
+                            for mau in temp:
+                                if mau not in (mau_dat_sl_bien + mau_can_lay_1) and car.stocks[mau] > 0:
+                                    mau_can_lay_1.append(mau)
+
+            mau_can_lay_2 = [mau for mau in sl_bien.keys() if mau not in (mau_dat_sl_bien + mau_can_lay_1)]
+
+        mau_can_lay_1_sorted = self.sap_xep_mau_func(mau_can_lay_1, sl_bien)
+        mau_can_lay_2_sorted = self.sap_xep_mau_func(mau_can_lay_2, sl_bien)
+
+        mau_quan_trong = [mau_can_lay_1_sorted, mau_can_lay_2_sorted]
+        return mau_quan_trong
 
     def the_co_the_lay_func(self, board, mau_the_quan_trong):
         list_card_can_check = []
@@ -287,63 +436,6 @@ class Agent(Player):
 
         return list_thu_hai
 
-    def chon_the_gia_tri_cao(self, list_the):
-        value_cards = [car.score / sum(list(car.stocks.values())) for car in list_the]
-        max_value = max(value_cards)
-
-        return list_the[value_cards.index(max_value)]
-
-    def mau_the_quan_trong_func(self, board):
-        if board.dict_Card_Stocks_Show['Noble'].__len__() == 0:
-            return [[], []]
-
-        temp = ["red", "blue", "green", "white", "black"]
-
-        sl_bien = {}
-        for mau in temp:
-            list_temp = [car.stocks[mau] for car in board.dict_Card_Stocks_Show['Noble']]
-            max_ = max(list_temp)
-            if max_ > 0:
-                sl_bien[mau] = max_
-
-        mau_dat_sl_bien = []
-        for mau in sl_bien.keys():
-            if self.stocks_const[mau] >= sl_bien[mau]:
-                mau_dat_sl_bien.append(mau)
-
-        if mau_dat_sl_bien.__len__() == 0:
-            mau_can_lay_1 = list(sl_bien.keys())
-            mau_can_lay_2 = []
-        elif mau_dat_sl_bien.__len__() == 1:
-            mau_can_lay_1 = []
-            for car in board.dict_Card_Stocks_Show['Noble']:
-                if car.stocks[mau_dat_sl_bien[0]] != 0:
-                    for mau in temp:
-                        if mau not in (mau_dat_sl_bien + mau_can_lay_1) and car.stocks[mau] > 0:
-                            mau_can_lay_1.append(mau)
-
-            mau_can_lay_2 = [mau for mau in sl_bien.keys() if mau not in (mau_dat_sl_bien + mau_can_lay_1)]
-        else:
-            mau_can_lay_1 = []
-            a = mau_dat_sl_bien.__len__()
-            for i in range(a):
-                for j in range(i + 1, a):
-                    mau1 = mau_dat_sl_bien[i]
-                    mau2 = mau_dat_sl_bien[j]
-                    for car in board.dict_Card_Stocks_Show['Noble']:
-                        if car.stocks[mau1] != 0 and car.stocks[mau2] != 0:
-                            for mau in temp:
-                                if mau not in (mau_dat_sl_bien + mau_can_lay_1) and car.stocks[mau] > 0:
-                                    mau_can_lay_1.append(mau)
-
-            mau_can_lay_2 = [mau for mau in sl_bien.keys() if mau not in (mau_dat_sl_bien + mau_can_lay_1)]
-
-        mau_can_lay_1_sorted = self.sap_xep_mau_func(mau_can_lay_1, sl_bien)
-        mau_can_lay_2_sorted = self.sap_xep_mau_func(mau_can_lay_2, sl_bien)
-
-        mau_quan_trong = [mau_can_lay_1_sorted, mau_can_lay_2_sorted]
-        return mau_quan_trong
-
     def sap_xep_mau_func(self, list_mau, sl_bien):
         if list_mau.__len__() == 0:
             return []
@@ -357,42 +449,9 @@ class Agent(Player):
         )}
 
         return list(dict_mau_sorted.keys())
+    def chon_the_gia_tri_cao(self, list_the):
+        value_cards = [car.score / sum(list(car.stocks.values())) for car in list_the]
+        max_value = max(value_cards)
 
-    def dict_the_lay_ngay_func(self, board):
-        dict_card = {
-            'red': [], 'blue': [], 'green': [], 'white': [], 'black': []
-        }
+        return list_the[value_cards.index(max_value)]
 
-        for card in self.card_upside_down:
-            if self.check_get_card(card):
-                dict_card[card.type_stock].append(card)
-
-        for type_card in board.dict_Card_Stocks_Show.keys():
-            if type_card != 'Noble':
-                for card in board.dict_Card_Stocks_Show[type_card]:
-                    if self.check_get_card(card):
-                        dict_card[card.type_stock].append(card)
-        return dict_card
-
-    #####################################################################################################
-
-    def check_winner(self, state):
-        name = ''
-        score_max = 14
-        player_win = None
-        if state['Turn']%4 == 0:
-            for player in list(state['Player']):
-                if player.score > score_max:
-                    score_max = player.score
-            if score_max > 14:
-
-                for player in list(state['Player']):
-                    if player.score >= score_max:
-                        score_max = player.score
-                        player_win = player
-                    elif player.score == score_max:
-                        if len(player.card_open) < len(player_win.card_open):
-                            player_win = player
-                if score_max > 14:
-                    print('Tap trung vao day nao')
-                    print(player_win.name, 'win với ', score_max, 'ở turn ',  state['Turn']/4)
