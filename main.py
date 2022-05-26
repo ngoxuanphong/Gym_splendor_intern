@@ -11,20 +11,18 @@ def main():
     env = gym.make('gym_splendor-v0')
     env.reset()
     start_time = time.time()
-    while env.turn <400:
+    while env.turn <1000:
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
-        env.render()
+        #env.render()
         if done == True:
             break
     for i in range(4):
         o,a,done,t = env.step(env.player[env.turn%env.amount_player].action(state = env.state))
         state = env.state
-    try:
         print(env.turn, env.pVictory.name, env.pVictory.score)
         return env.pVictory.name
-    except:
-        print('Hoa')
+
     
 #     if __name__ == '__main__':
 #         main()
-print(Counter(main() for i in range(1)))
+print(Counter(main() for i in range(100)))

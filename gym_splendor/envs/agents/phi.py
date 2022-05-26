@@ -23,22 +23,23 @@ class Agent(Player):
         stock_return = []
         list = []
         # in ra tat ca cac the co diem trên bàn và thẻ có điểm có số nguyên liệu thấp nhât
-        for type_card in state['Board'].dict_Card_Stocks_Show:
-            if type_card != 'Noble':
-                for c in state['Board'].dict_Card_Stocks_Show[type_card]:
-                    print(c.id, c.stocks, c.score, c.type_stock)
+        #for type_card in state['Board'].dict_Card_Stocks_Show:
+        #    if type_card != 'Noble':
+        #        for c in state['Board'].dict_Card_Stocks_Show[type_card]:
+        #            print(c.id, c.stocks, c.score, c.type_stock)
 
         # xem thẻ có điểm ít nguyên liệu nhất
         
-        card_it = state['Board'].dict_Card_Stocks_Show['II'][0]
-        
+        card_it = state['Board'].dict_Card_Stocks_Show['III'][0]
+
         answer = sum(card_it.stocks.values())
         for type_card in state['Board'].dict_Card_Stocks_Show:
             if type_card != 'Noble' and type_card !='I' :
                 for card1 in state['Board'].dict_Card_Stocks_Show[type_card]:
-                    if sum(card1.stocks.values())/card1.score >2 and sum(card1.stocks.values())/card1.score < 4 :
+                    if sum(card1.stocks.values())/card1.score >2 and sum(card1.stocks.values())/card1.score <4: 
                         card_it = card1 
-        print(card_it.id,card_it.stocks,card_it.score)
+                    
+        #print(card_it.id,card_it.stocks,card_it.score)
         
         
         
@@ -50,7 +51,7 @@ class Agent(Player):
                 for c in state['Board'].dict_Card_Stocks_Show[type_card]:
                     if self.check_get_card(c):
                         list_thelayduoc.append(c)
-        print(list_thelayduoc)
+        #print(list_thelayduoc)
 
         
         #lấy thẻ có ít nguyên liệu nhất
@@ -61,16 +62,16 @@ class Agent(Player):
         
 
         c = Counter(dict_du)
-        print("dict các sắp xếp giảm dần các thẻ trên bàn",c)
+        #print("dict các sắp xếp giảm dần các thẻ trên bàn",c)
         most_common = c.most_common(3)
         stocks = [key for key, val in most_common]
-        print("3 thẻ lớn nhất đã lấy",stocks)
+        #print("3 thẻ lớn nhất đã lấy",stocks)
 
         #stocks = sorted(dict_du, key=dict_du.get, reverse=True)[:3]
 
         
-        print(stocks)
-        print(sum(self.stocks.values()))
+        #print(stocks)
+        #print(sum(self.stocks.values()))
            
         #check xem có thẻ có thể lấy được không
 

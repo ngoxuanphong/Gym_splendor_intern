@@ -23,16 +23,16 @@ class Agent(Player):
         stock_return = []
         list = []
         #in ra tat ca cac the co diem trên bàn và thẻ có điểm có số nguyên liệu thấp nhât
-        for type_card in state['Board'].dict_Card_Stocks_Show:
-            if type_card != 'Noble':
-                for c in state['Board'].dict_Card_Stocks_Show[type_card]:
-                    print(c.id, c.stocks, c.score, c.type_stock)
+        #for type_card in state['Board'].dict_Card_Stocks_Show:
+        #    if type_card != 'Noble':
+        #        for c in state['Board'].dict_Card_Stocks_Show[type_card]:
+        #""""            print(c.id, c.stocks, c.score, c.type_stock)
 
         # xem thẻ có điểm ít nguyên liệu nhất
         
         card_it = state['Board'].dict_Card_Stocks_Show['II'][0]
         
-
+        
         for type_card in state['Board'].dict_Card_Stocks_Show:
             if type_card != 'Noble' and type_card !='I' :
                 for card1 in state['Board'].dict_Card_Stocks_Show[type_card]:
@@ -50,7 +50,7 @@ class Agent(Player):
                 for c in state['Board'].dict_Card_Stocks_Show[type_card]:
                     if self.check_get_card(c):
                         list_thelayduoc.append(c)
-        print(list_thelayduoc)
+        #print(list_thelayduoc)
 
         
         #lấy thẻ có ít nguyên liệu nhất
@@ -61,10 +61,10 @@ class Agent(Player):
         
 
         c = Counter(dict_du)
-        print("dict các sắp xếp giảm dần các thẻ trên bàn",c)
+        #print("dict các sắp xếp giảm dần các thẻ trên bàn",c)
         most_common = c.most_common(3)
         stocks = [key for key, val in most_common]
-        print("3 thẻ lớn nhất đã lấy",stocks)
+        #print("3 thẻ lớn nhất đã lấy",stocks)
 
         #stocks = sorted(dict_du, key=dict_du.get, reverse=True)[:3]
 
@@ -73,7 +73,7 @@ class Agent(Player):
         #print(sum(self.stocks.values()))
            
         #check xem có thẻ có thể lấy được không
-
+        
         if len(list_thelayduoc) > 0:
             card = list_thelayduoc[0]
             for card_layduoc in list_thelayduoc:
@@ -82,7 +82,7 @@ class Agent(Player):
                     break
                 elif sum(card.stocks.values()) < sum(card_layduoc.stocks.values()):
                     card = card_layduoc
-                
+        
         
         # stock_return = ['red', 'red', 'red']
         soNL = sum(self.stocks.values()) + len(stocks) - 10
